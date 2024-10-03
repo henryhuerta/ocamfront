@@ -1,0 +1,37 @@
+<dx-data-grid id="dataDetailGrid" [dataSource]="dataSource" [columns]="columns" [showBorders]="true"
+  (onSelectionChanged)="onChangedSelectionDataSource($event)" (onRowUpdated)="onChangedDataSource($event)"
+  (onEditorPreparing)="onEditorPreparing($event)">
+  <dxo-selection *ngIf="allowSelectDataSource" selectAllMode="allPages" showCheckBoxesMode="onClick"
+    mode="multiple"></dxo-selection>
+  <dxo-editing mode="cell" [allowUpdating]="allowEditingDataSource" [allowAdding]="false"></dxo-editing>
+  <div *dxTemplate="let data of 'checkFieldTemplate'">
+    <dx-check-box [(value)]="data.data['dataField']"></dx-check-box>
+  </div>
+  <div *dxTemplate="let data of 'textFieldTemplate'">
+    <dx-text-box [(value)]="data.data['dataField']"> </dx-text-box>
+  </div>
+  <div *dxTemplate="let data of 'numberFieldTemplate'">
+    <dx-number-box [(value)]="data.data['dataField']" type="number">
+    </dx-number-box>
+  </div>
+
+  <div *dxTemplate="let data of 'toTransferTemplate'">
+    <dx-number-box [(value)]="data.data.certificatesToTransfer" type="number">
+    </dx-number-box>
+  </div>
+
+
+  <div *dxTemplate="let data of 'dateFieldTemplate'">
+    <dx-date-box [(value)]="data.data['dataField']" displayFormat="{{ DisplayFormatDate }}" type="date">
+    </dx-date-box>
+  </div>
+  <div *dxTemplate="let data of 'dateTemplate'">
+    {{ data.value | date: DisplayFormatDate }}
+  </div>
+  <div *dxTemplate="let data of 'dateTimeTemplate'">
+    {{ data.value | date: DisplayFormatDateTime }}
+  </div>
+  <div *dxTemplate="let data of 'amountTemplate'">
+    {{ data.value | currency: Currency }}
+  </div>
+</dx-data-grid>

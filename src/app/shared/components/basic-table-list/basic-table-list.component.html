@@ -1,0 +1,151 @@
+
+<app-panel
+  *ngIf="!isEmptyOrNullString(title)"
+  [title]="title"
+  footerClass="p-b-0 p-t-20 b-t-0"
+>
+  <ng-content header select="[header]"></ng-content>
+
+  <ng-content select="[filterBody]"></ng-content>
+
+  <div *ngIf="showAdd || showRefresh" class="row">
+    <div class="col-lg-12">
+      <button
+        *ngIf="showAdd"
+        class="btn btn-primary"
+        type="button"
+        (click)="onClickNew()"
+      >
+        <i class="fa fa-plus"></i>
+        Nuevo
+      </button>
+      <button
+        *ngIf="showRefresh"
+        class="btn btn-warning pull-right"
+        type="button"
+        (click)="onClickRefresh()"
+      >
+        <i class="fas fa-sync-alt"></i>
+      </button>
+    </div>
+  </div>
+
+  <ng-container outsideBody>
+    <!-- (onRowPrepared)="dxOnRowPrepared($event)" -->
+    <div class="table-responsive text-nowrap" *ngIf="showTable">
+      <dx-data-grid
+        id="dataGrid"
+        [dataSource]="dataSource"
+        [columns]="columns"
+        [(summary)]="summary"
+        [remoteOperations]="false"
+        [allowColumnReordering]="true"
+        [rowAlternationEnabled]="true"
+        [showBorders]="true"
+      >
+        <dxo-paging [pageSize]="10"></dxo-paging>
+
+        <dxo-pager
+          [showPageSizeSelector]="true"
+          [showInfo]="true"
+          [allowedPageSizes]="[10, 25, 50, 100, 300]"
+        >
+        </dxo-pager>
+        <dxo-search-panel
+          *ngIf="showSearch"
+          [visible]="true"
+          [highlightCaseSensitive]="true"
+        >
+        </dxo-search-panel>
+        <dxo-export
+          *ngIf="showExport"
+          [enabled]="true"
+          [fileName]="title"
+          [allowExportSelectedData]="false"
+        >
+        </dxo-export>
+        <dxo-selection
+          *ngIf="showSelection"
+          selectAllMode="allPages"
+          showCheckBoxesMode="onClick"
+          mode="multiple"
+        ></dxo-selection>
+
+        <div *dxTemplate="let data of 'actionTemplate'">
+          <button
+            type="button"
+            *ngIf="data.data.isActive"
+            class="btn btn-warning pull-left btn-sm"
+            (click)="onClickEdit(data.data)"
+            title="Edit"
+          >
+            <i class="fa fa-edit"></i>
+          </button>
+          <button
+            type="button"
+            *ngIf="data.data.isActive && showDisable"
+            (click)="onClickDisable(data.data)"
+            class="btn btn-danger pull-left btn-sm"
+            title="Disable"
+          >
+            <i class="fas fa-trash-alt"></i>
+          </button>
+          <button
+            type="button"
+            *ngIf="!data.data.isActive && showEnable"
+            (click)="onClickEnable(data.data)"
+            class="btn btn-success pull-left btn-sm"
+            title="Enable"
+          >
+            <i class="fas fa-check-circle"></i>
+          </button>
+        </div>
+
+        <div *dxTemplate="let data of 'statusTemplate'">
+          <i *ngIf="data.data.isActive" class="fas fa-check-circle text-green">
+            ACTIVE</i
+          >
+          <i *ngIf="!data.data.isActive" class="fas fa-trash-alt text-danger">
+            INACTIVE</i
+          >
+        </div>
+
+        <div *dxTemplate="let data of 'dateTemplate'">
+          {{ data.value | date: DisplayFormatDate }}
+        </div>
+        <div *dxTemplate="let data of 'dateTimeTemplate'">
+          {{ data.value | date: DisplayFormatDateTime }}
+        </div>
+        <div *dxTemplate="let data of 'amountTemplate'">
+          {{ data.value | currency: Currency }}
+        </div>
+        <div *dxTemplate="let data of 'iconTemplate'">
+          <span class="{{ data.value }}"></span>
+        </div>
+        <div *dxTemplate="let data of 'deleteTemplate'">
+          <button
+            type="button"
+            (click)="onClickDelete(data.data)"
+            class="btn btn-success pull-left btn-sm"
+            title="Delete"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div *dxTemplate="let data of 'checkTemplate'">
+          <i
+            *ngIf="data.value === true"
+            class="fas fa-check-circle text-green"
+            style="color: green"
+          ></i>
+          <i
+            *ngIf="data.value === false"
+            class="fas fa-ban text-danger"
+            style="color: red"
+          ></i>
+        </div>
+      </dx-data-grid>
+    </div>
+  </ng-container>
+</app-panel>

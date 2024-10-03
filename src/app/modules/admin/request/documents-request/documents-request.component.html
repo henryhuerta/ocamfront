@@ -1,0 +1,28 @@
+<app-modal-with-option-buttons #entityComponent [title]="title" [optionButtons]="OptionButtons"
+  (onOptionButton)="optionButtonClicked($event)" (onClose)="close()">
+  <div class="overflow-auto pb-5">
+    <ng-template ngFor let-doc [ngForOf]="documents">
+
+      <div class="d-flex align-items-center border border-dashed border-gray-300 rounded p-5">
+
+        <div class="d-flex flex-aligns-center pe-10 pe-lg-20">
+          <div class="ms-1 fw-bold">
+            <a class="fs-6 text-hover-primary fw-bolder cursor-pointer " (click)="download(doc)">
+              {{ doc.fileName }}
+              <i class="fas fa-download "></i>
+            </a>
+            <div class="text-primary-400">
+              Cargado: {{ doc.lastUpdated | date: DisplayFormatDateTime }}
+            </div>
+          </div>
+        </div>
+        <br />
+        <br />
+
+      </div>
+      <br />
+
+    </ng-template>
+
+  </div>
+</app-modal-with-option-buttons>

@@ -1,0 +1,15 @@
+<ng-template #modalDialog let-modal let-c="close" let-d="dismiss">
+  <app-panel *ngIf="!isEmptyOrNullString(title)" [title]="title" footerClass="p-b-0 p-t-20 b-t-0" class="m-b-10">
+
+    <ng-content></ng-content>
+
+    <br />
+    <hr *ngIf="optionButtons != null && optionButtons.length > 0" style="background: gray;" />
+    <button *ngFor="let option of optionButtons" [className]="'option-button ' + option.btnClass"
+      (click)="onOptionButtonClicked(option)">
+      <i *ngIf="!isEmptyOrNullString(option.btnIcon)" [className]="option.btnIcon"></i>
+      {{option.btnText}}
+    </button>
+  </app-panel>
+
+</ng-template>

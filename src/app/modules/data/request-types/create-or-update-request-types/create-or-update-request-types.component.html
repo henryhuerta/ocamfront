@@ -1,0 +1,145 @@
+<app-modal-with-option-buttons
+  #entityComponent
+  [title]="title"
+  [optionButtons]="OptionButtons"
+  (onOptionButton)="optionButtonClicked($event)"
+  (onClose)="close()"
+>
+  <div>
+    <div class="row row-space-10">
+      <section class="col-md-6 col-xs-12">
+        <div class="form-group">
+          <label for="name">Nombre<i class="text-danger">*</i></label>
+          <dx-text-box #name [(value)]="Model.name"> </dx-text-box>
+          <app-validator-message
+            [error]="errors"
+            field="name"
+          ></app-validator-message>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <br />
+  <div class="row row-space-10">
+    <div class="col-xl-12">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="documents-tab"
+            data-toggle="tab"
+            data-target="#documents"
+            type="button"
+            role="tab"
+            (click)="clickTab('documents')"
+          >
+            Documentos
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content mt-5" id="myTabContent">
+        <div
+          class="tab-pane fade"
+          role="tabpanel"
+          [ngClass]="{ 'active show': selectedTab === 'documents' }"
+        >
+          <div class="col-xs-12 col-md-4">
+            <button
+              class="btn btn-primary"
+              type="button"
+              (click)="createDocument()"
+            >
+              Nuevo
+            </button>
+          </div>
+          <br class="" />
+          <br class="" />
+
+          <div class="row row-space-10">
+            <div class="col-xs-12">
+              <dx-data-grid
+                id="extensiones"
+                [dataSource]="Model.requestTypeDocuments"
+                [showRowLines]="true"
+                [rowAlternationEnabled]="true"
+              >
+                <dxo-paging [enabled]="false"></dxo-paging>
+                <dxi-column
+                  dataField="id"
+                  caption="Acciones"
+                  width="80"
+                  cellTemplate="actionTemplate"
+                  [allowExporting]="false"
+                >
+                </dxi-column>
+                <div *dxTemplate="let ext of 'actionTemplate'">
+                  <button
+                    *ngIf="ext.data.isActive"
+                    class="btn btn-warning pull-left btn-sm"
+                    title="Edit"
+                    type="button"
+                    (click)="updateDocument(ext.data)"
+                  >
+                    <i class="fas fa-edit"> </i>
+                  </button>
+                </div>
+                <dxo-editing
+                  mode="cell"
+                  [allowUpdating]="false"
+                  [allowAdding]="false"
+                  [allowDeleting]="false"
+                >
+                </dxo-editing>
+                <dxi-column dataField="description" caption="Descripcion">
+                </dxi-column>
+                <div *dxTemplate="let data of 'dateTemplate'">
+                  {{ data.value | date: DisplayFormatDate }}
+                </div>
+                <dxi-column
+                  dataField="lastUpdated"
+                  caption="Ultima actualizacion"
+                >
+                </dxi-column>
+
+                <div *dxTemplate="let data of 'checkTemplate'">
+                  <i
+                    *ngIf="data.value === true"
+                    class="fas fa-check-circle text-green"
+                  ></i>
+                  <i
+                    *ngIf="data.value === false"
+                    class="fas fa-ban text-danger"
+                  ></i>
+                </div>
+                <dxi-column
+                  dataField="required"
+                  caption="Requerido"
+                  cellTemplate="checkTemplate"
+                >
+                </dxi-column>
+                <dxi-column
+                  dataField="multiple"
+                  caption="Multiple"
+                  cellTemplate="checkTemplate"
+                >
+                </dxi-column>
+                <dxi-column
+                  dataField="enableInputPercent"
+                  caption="Habilitar % de redención"
+                  cellTemplate="checkTemplate"
+                >
+                </dxi-column>
+              </dx-data-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-modal-with-option-buttons>
+<app-create-or-update-request-type-document
+  (modalSave)="saveDocument($event)"
+  #createOrUpdateDocumentModal
+>
+</app-create-or-update-request-type-document>

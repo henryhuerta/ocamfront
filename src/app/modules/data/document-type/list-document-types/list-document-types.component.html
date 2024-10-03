@@ -1,0 +1,15 @@
+<app-basic-table-list
+  [title]="title"
+  [columns]="columns"
+  [dataSource]="DataSource"
+  (onRefresh)="getData()"
+  (onNew)="create()"
+  (onEdit)="update($event)"
+  (onDisable)="disable($event)"
+  (onEnable)="enable($event)"
+>
+</app-basic-table-list>
+
+<app-create-or-update-document-type
+  #createOrUpdateModal
+></app-create-or-update-document-type>

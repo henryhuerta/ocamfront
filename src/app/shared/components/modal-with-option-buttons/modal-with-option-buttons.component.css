@@ -1,0 +1,13 @@
+.option-button{
+  margin-right: 5px;;
+}
+.full-screen{
+  width: 100%;
+}
+
+.modal-xxl {
+  width: fit-content !important;
+  max-width: 90% !important;
+  max-height: 90%;
+}
+

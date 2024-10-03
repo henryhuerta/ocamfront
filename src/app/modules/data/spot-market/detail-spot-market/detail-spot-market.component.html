@@ -1,0 +1,81 @@
+<div _ngcontent-lfn-c65="" class="card card-xxl-stretch mb-5 mb-xl-12 ng-tns-c65-0">
+  <div _ngcontent-lfn-c65="" class="card-header border-0 pt-5 ng-tns-c65-0">
+    <h3 _ngcontent-lfn-c65="" class="card-title align-items-start flex-column ng-tns-c65-0">
+      <span _ngcontent-lfn-c65="" class="card-label fw-bolder fs-3 mb-1 ng-tns-c65-0">Certificados Disponibles
+      </span>
+    </h3>
+  </div>
+  <div _ngcontent-lfn-c65="" class="card-body card-border py-3 border-0 ng-tns-c65-0">
+
+    <div class="row">
+      <div *ngFor="let data of DataSource"
+        style="word-wrap: break-word; border: 3px solid #f0f0f0; border-radius: 8px; " class="col-xl-4">
+        <div _ngcontent-lfn-c65="" class="ng-tns-c65-0">
+          <div _ngcontent-lfn-c65="" style="
+            display: grid;
+            grid-template-columns: 60% 40%;
+            column-gap: 15px;
+          " class="ng-tns-c65-0">
+            <div _ngcontent-ibv-c82="" class="ng-tns-c82-3">
+              <p _ngcontent-ibv-c82="" class="ng-tns-c82-3">
+                <strong _ngcontent-ibv-c82="" class="ng-tns-c82-3">{{
+                  tenant.name
+                  }}</strong>
+              </p>
+              <p _ngcontent-ibv-c82="" class="ng-tns-c82-3">
+                <strong _ngcontent-ibv-c82="" class="ng-tns-c82-3">Tech:</strong>
+              </p>
+              <p _ngcontent-ibv-c82="" class="ng-tns-c82-3">
+                <strong _ngcontent-ibv-c82="" class="ng-tns-c82-3">Año</strong>
+              </p>
+              <p _ngcontent-ibv-c82="" class="ng-tns-c82-3">
+                <strong _ngcontent-ibv-c82="" class="ng-tns-c82-3">Planta</strong>
+              </p>
+              <p _ngcontent-ibv-c82="" class="ng-tns-c82-3">
+                <strong _ngcontent-ibv-c82="" class="ng-tns-c82-3">Volumen</strong>
+              </p>
+            </div>
+            <div _ngcontent-ibv-c82="" class="ng-tns-c82-3">
+              <p _ngcontent-ibv-c82="" class="ng-tns-c82-3">
+                <span _ngcontent-ibv-c82="" class="badge badge-white ng-tns-c82-3">-</span>
+              </p>
+              <p _ngcontent-ibv-c82="" class="ng-tns-c82-3">
+                <span _ngcontent-ibv-c82="" class="badge badge-white ng-tns-c82-3">{{ data.techType }}</span>
+              </p>
+              <p _ngcontent-ibv-c82="" class="ng-tns-c82-3">
+                <span _ngcontent-ibv-c82="" class="badge badge-white ng-tns-c82-3">{{ data.year }}</span>
+              </p>
+              <p _ngcontent-ibv-c82="" class="ng-tns-c82-3">
+                {{ data.nameInstalation }}
+              </p>
+              <p _ngcontent-ibv-c82="" class="ng-tns-c82-3">
+                <span _ngcontent-ibv-c82="" class="badge badge-white ng-tns-c82-3">{{ data.volumen
+                  }}</span>
+              </p>
+            </div>
+            <div _ngcontent-ibv-c82="" class="ng-tns-c82-3">
+              <i _ngcontent-ibv-c82="" class="ng-tns-c82-3">Tel: {{ tenant.phoneNumber }} / Correo:
+                {{ tenant.email }}</i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div _ngcontent-lfn-c65="" class="card-footer border-0 ng-tns-c65-0">
+    <div _ngcontent-lfn-c65="" style="
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        column-gap: 10px;
+      " class="ng-tns-c65-0">
+      <button _ngcontent-lfn-c65="" class="btn btn-secondary ng-tns-c65-0" routerLink="/data/spot-market">
+        Regresar
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<dx-data-grid noDataText="" height="0px"></dx-data-grid>

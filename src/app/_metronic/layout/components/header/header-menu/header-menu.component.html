@@ -1,0 +1,79 @@
+<!-- Dashboard -->
+<div class="menu-item me-lg-1">
+  <a class="menu-link py-3" routerLinkActive="active menu-here" routerLink="/data/home-page">
+    <span class="menu-title">
+      INICIO
+    </span>
+  </a>
+</div>
+
+<div class="menu-item me-lg-1">
+  <a class="menu-link py-3" routerLinkActive="active menu-here" routerLink="/data/profile">
+    <span class="menu-title">
+      CONSULTAS
+    </span></a>
+</div>
+
+<div class="menu-item me-lg-1">
+  <a class="menu-link py-3" routerLinkActive="active menu-here" routerLink="/operation/register-project">
+    <span class="menu-title">
+      OPERACIONES
+    </span></a>
+</div>
+
+<div class="menu-item me-lg-1">
+  <a class="menu-link py-3" routerLinkActive="active menu-here" routerLink="/request/create-request">
+    <span class="menu-title">
+      SOLICITUDES
+    </span></a>
+</div>
+
+<div class="menu-item me-lg-1">
+  <a class="menu-link py-3" routerLinkActive="active menu-here" routerLink="/data/spot-market">
+    <span class="menu-title">
+      MERCADO SPOT
+    </span></a>
+</div>
+
+<div class="menu-item me-lg-1">
+  <a class="menu-link py-3" routerLinkActive="active menu-here" routerLink="/data/frequentquestion/faq">
+    <span class="menu-title">
+      FAQ
+    </span></a>
+</div>
+
+
+<!-- Apps -->
+<div class="menu-item menu-lg-down-accordion me-lg-1" *ngIf="Administrator" data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
+  data-kt-menu-placement="bottom-start">
+
+  <span class="menu-link py-3" [ngClass]="calculateMenuItemCssClass('/apps')">
+    <span class="menu-title">ADMINISTRACIÓN</span>
+    <span class="menu-arrow d-lg-none"></span>
+  </span>
+
+  <div class="
+      menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0
+      py-lg-4
+      w-lg-225px
+    " data-kt-menu-dismiss="true">
+    <div class="menu-item menu-lg-down-accordion me-lg-1" data-kt-menu-trigger="{default:'click', lg: 'hover'}"
+      data-kt-menu-placement="right-start">
+
+      <div class="menu-item me-lg-1">
+        <a class="menu-link py-3" routerLinkActive="active" routerLink="/administration/project-requests"><span
+            class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">
+            SOLICITUDES DE PROYECTO
+          </span></a>
+      </div>
+
+      <div class="menu-item me-lg-1">
+        <a class="menu-link py-3" routerLinkActive="active" routerLink="/administration/requests"><span
+            class="menu-bullet"><span class="bullet bullet-dot"></span></span><span class="menu-title">
+            SOLICITUDES DE CONSUMO
+          </span></a>
+      </div>
+
+    </div>
+  </div>
+</div>

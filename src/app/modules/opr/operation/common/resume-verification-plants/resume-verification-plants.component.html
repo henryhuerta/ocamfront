@@ -1,0 +1,49 @@
+<h3 class="">Verificar Datos</h3>
+<div class="table-responsive text-nowrap">
+  <dx-data-grid id="projectPlants" [dataSource]="DxDataSource" [columns]="columns" [remoteOperations]="false"
+    [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="false">
+  </dx-data-grid>
+</div>
+<br class="" />
+<h3 class="">Datos de la instalacion</h3>
+<div class="table-responsive text-nowrap">
+  <dx-data-grid id="projectPlants" [dataSource]="DxDataSource" [columns]="columnsCertificates"
+    [remoteOperations]="false" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="false">
+  </dx-data-grid>
+</div>
+<br class="" />
+<div class="">
+  <p class="">
+    CEL a {{ transactionType }}: <strong>{{ certificatesToProcess }}</strong>
+  </p>
+  <p class="" *ngIf="transactionType === 'cancelar'">
+    Motivo de cancelacion: <strong>{{ transaction.textLog }}</strong>
+  </p>
+  <p class="" *ngIf="transactionType !== 'cancelar'">
+    Cuenta destino: <strong>{{ account.accountNumber }}</strong>
+  </p>
+  <p class="" *ngIf="transaction.transferType === 1 && transactionType !== 'cancelar'">
+    Beneficiario: <strong>{{ account.beneficiary }}</strong>
+  </p>
+  <p class="" *ngIf="transaction.transferType === 2 && transactionType !== 'cancelar'">
+    Beneficiario: <strong>{{ transaction.beneficiary }}</strong>
+  </p>
+  <p class="" *ngIf="transaction.transferType === 2 && transactionType !== 'cancelar'">
+    Correo: <strong>{{ transaction.beneficiaryEmail }}</strong>
+  </p>
+  <p class="" *ngIf="transaction.transferType === 2 && transactionType !== 'cancelar'">
+    Dirección: <strong>{{ transaction.beneficiaryAddress }}</strong>
+  </p>
+  <p class="" *ngIf="transaction.transferType === 2 && transactionType !== 'cancelar'">
+    Fecha Inicial:
+    <strong>{{
+      transaction.beneficiaryMinDate | date: DisplayFormatDate
+      }}</strong>
+  </p>
+  <p class="" *ngIf="transaction.transferType === 2 && transactionType !== 'cancelar'">
+    Fecha Final:
+    <strong>{{
+      transaction.beneficiaryMaxDate | date: DisplayFormatDate
+      }}</strong>
+  </p>
+</div>

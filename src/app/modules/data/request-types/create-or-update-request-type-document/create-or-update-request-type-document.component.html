@@ -1,0 +1,52 @@
+<app-modal-with-option-buttons #entityComponent [title]="title" [optionButtons]="OptionButtons"
+  (onOptionButton)="optionButtonClicked($event)" (onClose)="close()">
+  <div>
+    <div class="row row-space-10">
+      <section class="col-md-6 col-xs-12">
+        <div class="form-group">
+          <label for="description">Descripción<i class="text-danger">*</i></label>
+          <dx-text-area #description [(value)]="Model.description">
+          </dx-text-area>
+          <app-validator-message [error]="errors" field="description"></app-validator-message>
+        </div>
+      </section>
+      <section class="col-md-6 col-xs-12">
+        <div class="form-group">
+          <label for="lastUpdated">Ultima Actualizacion<i class="text-danger">*</i></label>
+          <dx-date-box displayFormat="{{ DisplayFormatDate }}"  type="date"  [(ngModel)]="Model.lastUpdated">
+          </dx-date-box>
+          <app-validator-message [error]="errors" field="lastUpdated"></app-validator-message>
+        </div>
+      </section>
+      <section class="col-md-3 col-xs-12">
+        <div class="form-group" style="padding-top: 15px">
+          <dx-check-box [(ngModel)]="Model.required" #required class="custom-control-input" id="required" text="Requerido">
+          </dx-check-box>
+        </div>
+      </section>
+      <section class="col-md-3 col-xs-12">
+        <div class="form-group" style="padding-top: 15px">
+          <dx-check-box [(ngModel)]="Model.multiple" #multiple class="custom-control-input" id="multipe" text="Multiple">
+          </dx-check-box>
+        </div>
+      </section>
+      <section class="col-md-6 col-xs-12">
+        <div class="form-group">
+          <label for="documentTypeId">Tipo de Documento</label>
+          <dx-select-box displayExpr="name" valueExpr="id" [searchEnabled]="true" [dataSource]="documentsTypeSource"
+            [(value)]="Model.documentTypeId">
+          </dx-select-box>
+          <app-validator-message [error]="errors" field="selectId"></app-validator-message>
+        </div>
+      </section>
+      <section class="col-md-5 col-xs-12">
+        <div class="form-group" style="padding-top: 15px">
+          <dx-check-box [(ngModel)]="Model.enableInputPercent" #enableInputPercent class="custom-control-input" id="enableInputPercent"
+            text="Habilitar % de redención">
+          </dx-check-box>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</app-modal-with-option-buttons>

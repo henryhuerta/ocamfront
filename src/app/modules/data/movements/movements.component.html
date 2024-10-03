@@ -1,0 +1,50 @@
+<div class="content-create">
+  <h4 class="text-success">Descarga tus movimientos</h4>
+  <div class="row row-space-10">
+    <section class="col-md-6 col-xs-12">
+      <div class="form-group">
+        <label for="lastUpdated">Fecha Desde<i class="text-danger">*</i></label>
+        <dx-date-box displayFormat="{{ DisplayFormatDate }}" placeholder="Fecha desde" type="date"
+          [(ngModel)]="dateFrom">
+        </dx-date-box>
+        <app-validator-message
+        field="dateFrom"
+      ></app-validator-message>
+      </div>
+    </section>
+    <section class="col-md-6 col-xs-12">
+      <div class="form-group">
+        <label for="lastUpdated">Fecha Hasta<i class="text-danger">*</i></label>
+        <dx-date-box displayFormat="{{ DisplayFormatDate }}" placeholder="Fecha hasta" type="date" [value]="dateTo" [(ngModel)]="dateTo">
+        </dx-date-box>
+        <app-validator-message
+        field="dateTo"
+      ></app-validator-message>
+      </div>
+    </section>
+    <section class="col-md-12 col-xs-12">
+      <div class="form-group">
+        <label for="documentTypeId">Seleccione una cuenta <i class="text-danger">*</i></label>
+        <dx-select-box displayExpr="accountNumber" valueExpr="id" [searchEnabled]="true" [dataSource]="accountSource"
+          [(value)]="acc.id"  [(ngModel)]="acc.id">
+          <dx-validator>
+            <dxi-validation-rule
+              type="required"
+              message="La cuenta es requerida"
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-select-box>
+        <app-validator-message
+        field="acc.id"
+      ></app-validator-message>
+      </div>
+    </section>
+    <div class="form-group">
+      <br />
+      <button type="button" class="btn btn-danger" style="margin-left: 5px;"
+      [disabled] = "!validMovement()"
+        (click)="print();">
+        GENERAR DOCUMENTO</button>
+    </div>
+  </div>
+</div>

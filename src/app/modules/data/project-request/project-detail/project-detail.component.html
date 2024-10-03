@@ -1,0 +1,118 @@
+<app-modal-with-option-buttons #entityComponent [optionButtons]="OptionButtons"
+  (onOptionButton)="optionButtonClicked($event)" [title]="title" (onClose)="close()">
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <tbody>
+
+        <tr>
+          <td><strong>
+              PAÍS
+            </strong></td>
+          <td></td>
+          <td><strong>
+              DNI/NIE DEL TITULAR DE LA INSTALACION
+            </strong></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td> {{Model.country}} </td>
+          <td></td>
+          <td> {{Model.dni}} </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><strong>
+              Nombre y Apellidos / Razon social del titular de la instalacion
+            </strong></td>
+          <td></td>
+          <td><strong>
+              Nombre de Instalacion
+            </strong></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td> {{Model.businessNameInstalation}} </td>
+          <td></td>
+          <td> {{Model.nameInstalation}} </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><strong>
+              Fecha de Puesta en Marcha
+            </strong></td>
+          <td></td>
+          <td><strong>
+              Código de Entrega
+            </strong></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td> {{Model.startUpDate  | date: DisplayFormatDate}} </td>
+          <td></td>
+          <td> {{Model.deliveryCode}} </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><strong>
+              Tipo de Tecnología
+            </strong></td>
+          <td></td>
+          <td><strong>
+              Potencia Electrica de la instalacion
+            </strong></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td> {{Model.tech}} </td>
+          <td></td>
+          <td> {{Model.electricPower}} </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><strong>
+              Inicio del Periodo Solicitado
+            </strong></td>
+          <td></td>
+          <td><strong>
+              Fin del Periodo Solicitado
+            </strong></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td> {{Model.initPeriodDate | date: DisplayFormatDate}} </td>
+          <td></td>
+          <td> {{Model.endPeriodDate | date: DisplayFormatDate}} </td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td><strong>
+              Certificados de Energia Limpia
+            </strong></td>
+          <td></td>
+          <td><strong>
+            </strong></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td> {{Model.certificatesRequested}} </td>
+          <td></td>
+          <td> </td>
+          <td></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+</app-modal-with-option-buttons>

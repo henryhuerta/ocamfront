@@ -1,0 +1,35 @@
+<div class="card card-xl-stretch mb-xl-12" *ngIf="success">
+  <!-- begin panel-heading -->
+  <div class="card-header border-0 pt-5">
+    <div class="card-title flex-column">
+      <h3 class="text-success text-center">{{ title }}</h3>
+    </div>
+  </div>
+  <!-- end panel-heading -->
+
+  <!-- begin panel-body -->
+  <div class="card-body text-center">
+    <h2 class="text-success">Transacción exitosa</h2>
+    <br class="" />
+    <i class="fas fa-check fa-10x" style="color: green"></i>
+  </div>
+  <!-- end after-footer -->
+</div>
+
+<div class="card card-xl-stretch mb-xl-12" *ngIf="!success">
+  <!-- begin panel-heading -->
+  <div class="card-header border-0 pt-5">
+    <div class="card-titleflex-column">
+      <h3 class="text-danger text-center">{{ title }}</h3>
+    </div>
+  </div>
+  <!-- end panel-heading -->
+  <!-- end before-body -->
+
+  <!-- begin panel-body -->
+  <div class="card-body text-center">
+    <h2 class="text-danger">Transacción no exitosa</h2>
+    <br class="" />
+    <i class="fas fa-times fa-10x" style="color: red"></i>
+  </div>
+</div>

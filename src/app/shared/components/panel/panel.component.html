@@ -1,0 +1,35 @@
+<div class="row g-5 g-xl-8">
+    <div class="col-xl-12">
+        <!-- begin panel -->
+        <div class="card card-xl-stretch mb-xl-12">
+            <!-- begin panel-heading -->
+            <div class="card-header border-0 pt-5" *ngIf="title">
+                <div class="card-title align-items-start flex-column">
+                    <h3 *ngIf="title">{{ title }}</h3>
+                    <ng-content select="[header]"></ng-content>
+                </div>
+            </div>
+            <!-- end panel-heading -->
+
+            <!-- begin before-body -->
+            <ng-content select="[beforeBody]"></ng-content>
+            <!-- end before-body -->
+
+            <!-- begin panel-body -->
+            <div class="card-body" *ngIf="!noBody">
+                <ng-content></ng-content>
+            </div>
+            <!-- end panel-body -->
+
+            <!-- begin outside-body -->
+            <ng-content select="[outsideBody]"></ng-content>
+            <!-- end outside-body -->
+
+            <!-- begin after-footer -->
+            <ng-content select="[afterFooter]"></ng-content>
+            <!-- end after-footer -->
+
+        </div>
+        <!-- end panel -->
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<!-- <div class="container"> -->
+
+<div class="row" style="width: 100%">
+  <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="row">
+      <div class="col-md-3">
+        <app-panel title="¿Qué operación desea realizar?">
+          <div class="menu-items">
+            <button (click)="goToRegisterProject()" [ngClass]="
+                selectedOperation === 'register-project'
+                  ? 'btn btn-success'
+                  : 'btn btn-secondary'
+              ">
+              Registrar Proyecto
+            </button>
+            <button (click)="goToTranferCertificates()" [ngClass]="
+                selectedOperation === 'transfers'
+                  ? 'btn btn-success'
+                  : 'btn btn-secondary'
+              ">
+              Transferir Certificados
+            </button>
+            <button (click)="goToRedeemCertificates()" [ngClass]="
+                selectedOperation === 'redemptions'
+                  ? 'btn btn-success'
+                  : 'btn btn-secondary'
+              ">
+              Redimir Certificados
+            </button>
+            <button (click)="goToCancelCertificates()" [ngClass]="
+                selectedOperation === 'cancellations'
+                  ? 'btn btn-success'
+                  : 'btn btn-secondary'
+              ">
+              Cancelar Certificados
+            </button>
+          </div>
+        </app-panel>
+      </div>
+      <div class="col-md-9">
+        <app-panel [title]="titles[selectedOperation]">
+          <div class="content-operations">
+            <router-outlet></router-outlet>
+          </div>
+        </app-panel>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <dx-data-grid noDataText="" height="30"></dx-data-grid>
+</div>

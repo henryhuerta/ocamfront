@@ -1,0 +1,32 @@
+<app-modal-with-option-buttons #entityComponent [title]="title" [optionButtons]="OptionButtons"
+  (onOptionButton)="optionButtonClicked($event)" (onClose)="close()">
+  <div>
+    <div class="row row-space-10">
+      <section class="col-md-6 col-xs-12">
+        <div class="form-group">
+          <label for="frequentQuestionCategoryId">Categorias FAQ</label>
+          <dx-select-box displayExpr="text" valueExpr="value" [searchEnabled]="true" [dataSource]="DxSelectBoxData"
+            [(value)]="Model.frequentQuestionCategoryId">
+          </dx-select-box>
+          <app-validator-message [error]="errors" field="frequentQuestionCategoryId"></app-validator-message>
+        </div>
+      </section>
+      <section class="col-md-12 col-xs-12">
+        <div class="form-group">
+          <label for="question">Pregunta<i class="text-danger">*</i></label>
+          <dx-text-area #question [(value)]="Model.question">
+          </dx-text-area>
+          <app-validator-message [error]="errors" field="name"></app-validator-message>
+        </div>
+      </section>
+      <section class="col-md-12 col-xs-12">
+        <div class="form-group">
+          <label for="answer">Respuesta<i class="text-danger">*</i></label>
+          <dx-text-area #answer height="200" [(value)]="Model.answer">
+          </dx-text-area>
+          <app-validator-message [error]="errors" field="name"></app-validator-message>
+        </div>
+      </section>
+    </div>
+  </div>
+</app-modal-with-option-buttons>

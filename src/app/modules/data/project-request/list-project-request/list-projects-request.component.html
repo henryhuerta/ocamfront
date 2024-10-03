@@ -1,0 +1,62 @@
+<div class="table-responsive">
+  <table class="table align-middle gs-0 gy-5">
+    <thead>
+      <tr>
+        <td>
+          <h4>Tecnología</h4>
+        </td>
+        <td>
+          <h4>Nombre</h4>
+        </td>
+        <td>
+          <h4>Estado</h4>
+        </td>
+        <td>
+          <h4># de Cuenta</h4>
+        </td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let project of data">
+        <td>
+          <div class="d-flex justify-content-start flex-column"><span
+              class="text-muted fw-bold text-muted d-block fs-7"> {{project.tech}} </span>
+          </div>
+        </td>
+        <td>
+          <div class="d-flex justify-content-start flex-column"><span
+              class="text-muted fw-bold text-muted d-block fs-7"> {{project.name}} </span>
+          </div>
+        </td>
+        <td class="text-muted fw-bold">
+          <span class="badge"
+            [ngClass]="{ 'badge-warning': project.projectStatusValue==='Pendiente', 'badge-success': project.projectStatusValue==='Aceptado', 'badge-danger': project.projectStatusValue==='Rechazado' }">
+            {{project.projectStatusValue}}</span>
+        </td>
+        <td>
+          <div class="d-flex justify-content-start flex-column">
+            <span *ngIf="project.accountNumber" class="text-muted fw-bold text-muted d-block fs-7"> #
+              {{project.accountNumber}} </span>
+            <span *ngIf="!project.accountNumber" class="text-muted fw-bold text-muted d-block fs-7"> ... </span>
+          </div>
+        </td>
+        <td>
+          <div class="d-flex justify-content-end flex-shrink-0"><button (click)="viewTransaction(project);"
+              class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary"><span class="svg-icon svg-icon-2"><svg
+                  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)"
+                    fill="black"></rect>
+                  <path
+                    d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z"
+                    fill="black"></path>
+                </svg></span>
+            </button></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<app-project-detail #ProjectDetail></app-project-detail>

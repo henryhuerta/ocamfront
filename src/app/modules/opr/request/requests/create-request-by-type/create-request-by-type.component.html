@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="" *ngIf="RequestType.id === 0">
+    <h4 class="text-primary">
+      Seleccione una de las opciones disponibles para crear una solictud
+    </h4>
+  </div>
+  <div class="" *ngIf="RequestType.id > 0">
+    <section class="col-md-12" *ngFor="let doc of RequestType.requestTypeDocuments; let i = index">
+      <div class="custom-file-input">
+        <label for="formFile" class="form-label">Adjuntar {{ doc.description }}</label>
+        <input [multiple]="doc.multiple" class="form-control" type="file" id="formFile"
+          (change)="uploadFiles($event, doc.documentTypeId)" />
+        <span><i class="text-danger">**</i><i class="text-gray">Extensiones permitidas:
+            {{ doc.extensionsAllowed }}
+          </i></span>
+      </div>
+      <br class="" />
+    </section>
+    <br class="" />
+    <section class="col-md-4 col-xs-12">
+      <div class="form-group">
+        <label for="percent">Porcentaje de rendeción</label>
+        <dx-number-box id="numberBox" name="numberBox" [(value)]="Model.percent" placeholder="" type="number">
+        </dx-number-box>
+        <app-validator-message [error]="errors" field="percent"></app-validator-message>
+      </div>
+    </section>
+  </div>
+  <div class="form-group" *ngIf="RequestType.id > 0">
+    <br />
+    <button type="button" class="btn btn-danger" style="margin-left: 5px;" (click)="cancel()">
+      CANCELAR</button>
+    <button type="button" class="btn btn-success" style="margin-left: 5px;" (click)="save()">
+      ENVIAR SOLICITUD
+    </button>
+  </div>
+</div>

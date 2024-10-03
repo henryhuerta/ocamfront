@@ -1,0 +1,45 @@
+<!-- <div class="row" style="width: 100%">
+  <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="row">
+      <div class="col-md-12">
+        <app-panel title="COMPENSACION">
+          <div class="content-create"></div>
+        </app-panel>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="row" style="width: 100%">
+  <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="row">
+      <div class="col-lg-6">
+        <app-panel title="CUENTAS">
+          <app-list-accounts *ngIf="listAccounts && listAccounts.length > 0" [accounts]="listAccounts">
+          </app-list-accounts>
+        </app-panel>
+      </div>
+      <div class="col-lg-6">
+        <app-panel title="MOVIMIENTOS">
+          <app-movements></app-movements>
+        </app-panel>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" style="width: 100%">
+  <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="row">
+      <div class="col-md-12">
+        <app-panel title="CENTRALES GENGERADORAS">
+          <app-list-projects (onChangeCount)="setCount($event)">
+          </app-list-projects>
+        </app-panel>
+      </div>
+    </div>
+  </div>
+</div>
+<app-model-user-type-generator-first-login #modelUserGenerator></app-model-user-type-generator-first-login>
+
+<dx-data-grid noDataText="" height="0px"></dx-data-grid>
+

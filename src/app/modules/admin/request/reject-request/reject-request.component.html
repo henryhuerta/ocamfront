@@ -1,0 +1,25 @@
+<app-modal-with-option-buttons
+  #entityComponent
+  [title]="title"
+  [optionButtons]="OptionButtons"
+  (onOptionButton)="optionButtonClicked($event)"
+  (onClose)="close()"
+>
+  <div>
+    <div class="row row-space-10">
+      <section class="col-md-12 col-xs-12">
+        <div class="form-group">
+          <label for="textLog"
+            >Razones de rechazo<i class="text-danger">*</i></label
+          >
+          <dx-text-box #textLog [(value)]="Model.textLog">
+          </dx-text-box>
+          <app-validator-message
+            [error]="errors"
+            field="textLog"
+          ></app-validator-message>
+        </div>
+      </section>
+    </div>
+  </div>
+</app-modal-with-option-buttons>

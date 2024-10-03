@@ -1,0 +1,43 @@
+<app-panel [title]="title" footerClass="p-b-0 p-t-20 b-t-0">
+  <ng-container>
+    <div class="table-responsive text-nowrap">
+      <dx-data-grid id="dataGrid" [dataSource]="DataSourceRequests" [remoteOperations]="false"
+        [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true">
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="[10, 25, 50, 100, 300]">
+        </dxo-pager>
+        <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true">
+        </dxo-search-panel>
+
+        <dxo-editing mode="cell" [allowUpdating]="false" [allowAdding]="false" [allowDeleting]="false">
+        </dxo-editing>
+        <dxi-column dataField="id" caption="" width="180" cellTemplate="actionTemplate" [allowExporting]="false">
+        </dxi-column>
+        <div *dxTemplate="let data of 'actionTemplate'">
+          <button class="btn btn-success pull-left btn-sm" title="Approve" type="button"
+            (click)="approveProject(data.data)">
+            <i class="fas fa-check"> </i></button>{{ " " }}
+          <button class="btn btn-danger text-center btn-sm" title="Reject" type="button"
+            (click)="showReject(data.data)">
+            <i class="fas fa-trash"> </i></button>{{ " " }}
+          <button class="btn btn-primary text-center btn-sm" title="documents" type="button"
+            (click)="showDocuments(data.data)">
+            <i class="fas fa-folder-open"> </i>
+          </button>
+        </div>
+        <dxi-column dataField="requesterName" caption="Solicitante"> </dxi-column>
+        <dxi-column dataField="requestType" caption="Tipo de redención">
+        </dxi-column>
+        <dxi-column dataField="percent" caption="Total redención">
+        </dxi-column>
+        <dxi-column dataField="timeOfRequest" caption="Tiempo de Solicitud">
+        </dxi-column>
+
+      </dx-data-grid>
+    </div>
+  </ng-container>
+</app-panel>
+
+<app-reject-request #rejectRequestModal (modalSave)="getRequests()"></app-reject-request>
+
+<app-documents-request #documentsRequestModal></app-documents-request>

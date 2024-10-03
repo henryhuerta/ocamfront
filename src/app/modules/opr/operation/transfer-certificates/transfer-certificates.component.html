@@ -1,0 +1,144 @@
+<div class="row" *ngIf="
+    !acceptedToTransfer &&
+    !proceedToAssignAccount &&
+    !verifyDataTransfer &&
+    !showAlert
+  ">
+  <section class="col-md-12 col-xs-12">
+    <ng-template ngFor let-item [ngForOf]="DxAccountTypes">
+      <button class="btn btn-sm btn-success" style="margin-right: 5px" (click)="getAccountTypeById(item.id)">
+        {{ item.code }}
+      </button>
+    </ng-template>
+  </section>
+  <br class="" />
+  <br class="" />
+</div>
+
+<ng-container *ngIf="
+    !acceptedToTransfer &&
+    !proceedToAssignAccount &&
+    !verifyDataTransfer &&
+    !showAlert
+  ">
+  <app-master-detail-table [columnsSource]="columns" [columnsDetailSource]="columnsDetail" [dataSource]="DataSource"
+    [keySource]="'projectPlants'" [allowEditingDataSource]="false" [allowEditingDetailDataSource]="true"
+    (changedDataSource)="onChangedDataSource($event)" (changedDetailDataSource)="onChangedDetailDataSource($event)"
+    (changedSelectionDetailDataSource)="
+      onChangedSelectionDetailDataSource($event)
+    " [allowSelectDataSource]="false" [allowSelectDetailDataSource]="true"></app-master-detail-table>
+  <br class="" />
+  <h3 class="">
+    Total de certificados a transferir: {{ TotalCertificatesToTransfer }}
+  </h3>
+  <app-validator-message [error]="proccessErrors" field="totalTransfer"></app-validator-message>
+  <app-validator-message [error]="proccessErrors" field="notAvailable"></app-validator-message>
+  <app-validator-message [error]="proccessErrors" field="projectSelected"></app-validator-message>
+  <br class="" />
+  <div class="pull-left">
+    <button type="button" class="btn btn-success btn-sm" (click)="continueProcess('acceptedToTransfer')">
+      Aceptar
+    </button>
+    <br class="" />
+  </div>
+</ng-container>
+<ng-container *ngIf="
+    acceptedToTransfer &&
+    !proceedToAssignAccount &&
+    !verifyDataTransfer &&
+    !showAlert
+  ">
+  <p class="">
+    Total de certificados disponibles:
+    <strong>{{ TotalCertificatesAvailable }}</strong>
+  </p>
+  <p class="">
+    Total de certificados a transferir:
+    <strong>{{ TotalCertificatesToTransfer }}</strong>
+  </p>
+  <p class="">
+    Certificados restantes:
+    <strong>{{
+      TotalCertificatesAvailable - TotalCertificatesToTransfer
+      }}</strong>
+  </p>
+  <br class="" />
+  <div class="pull-left">
+    <button type="button" class="btn btn-success btn-sm" (click)="continueProcess('assignAccountToTransfer')">
+      ¿Continuar?</button>{{ " " }}
+    <button type="button" class="btn btn-danger btn-sm" (click)="cancelTransfer()">
+      Cancelar
+    </button>
+    <br class="" />
+  </div>
+</ng-container>
+<ng-container *ngIf="
+    !acceptedToTransfer &&
+    proceedToAssignAccount &&
+    !verifyDataTransfer &&
+    !showAlert
+  ">
+  <h4>Ingrese datos de la cuenta a transferir</h4>
+  <section class="col-md-6 col-xs-12">
+    <div class="form-group">
+      <label for="accountNumber">Numero de Cuenta <small>(##-##########)</small><i class="text-danger">*</i></label>
+      <dx-text-box #accountNumber [maskRules]="rulesAccount" [(value)]="Account.accountNumber"
+        (onEnterKey)="getAccountData($event)"></dx-text-box>
+    </div>
+  </section>
+
+  <section class="col-md-6 col-xs-12">
+    <div class="form-group">
+      <label for="beneficiary">Beneficiario<i class="text-danger">*</i></label>
+      <dx-text-box #beneficiary [(value)]="Account.beneficiary"> </dx-text-box>
+      <app-validator-message [error]="errorsAccount" field="beneficiary"></app-validator-message>
+    </div>
+  </section>
+  <br class="" />
+  <app-validator-message [error]="proccessErrors" field="accountToTransfer"></app-validator-message>
+  <div class="pull-left">
+    <button type="button" class="btn btn-success btn-sm" (click)="continueProcess('verifyData')">
+      ¿Continuar?</button>{{ " " }}
+    <button type="button" class="btn btn-danger btn-sm" (click)="cancelTransfer()">
+      Cancelar
+    </button>
+    <br class="" />
+  </div>
+</ng-container>
+<!-- summary -->
+<ng-container *ngIf="
+    !acceptedToTransfer &&
+    !proceedToAssignAccount &&
+    verifyDataTransfer &&
+    !showAlert
+  ">
+  <app-resume-verification-plants [projectPlants]="projectPlants" [accountType]="accountType.code"
+    [certificatesToProcess]="TotalCertificatesToTransfer" [account]="Account" [transaction]="Model"
+    [transactionType]="'transferir'">
+  </app-resume-verification-plants>
+  <br class="" />
+  <div class="pull-left">
+    <button type="button" class="btn btn-success btn-sm" (click)="continueProcess('save')">
+      Procesar</button>{{ " " }}
+    <button type="button" class="btn btn-danger btn-sm" (click)="cancelTransfer()">
+      Cancelar
+    </button>
+    <br class="" />
+  </div>
+</ng-container>
+
+<ng-container *ngIf="
+    !acceptedToTransfer &&
+    !proceedToAssignAccount &&
+    !verifyDataTransfer &&
+    showAlert
+  ">
+  <app-transaction-completed-uncompleted [title]="'Transferencia'" [success]="transactionSuccess">
+  </app-transaction-completed-uncompleted>
+  <br class="" />
+  <div class="pull-left">
+    <button type="button" class="btn btn-success btn-sm" (click)="finishProcess()">
+      Finalizar proceso</button>{{ " " }}
+    <br class="" />
+  </div>
+</ng-container>

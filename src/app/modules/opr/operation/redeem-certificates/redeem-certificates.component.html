@@ -1,0 +1,202 @@
+<div class="row" *ngIf="
+    !accepterToRedeem &&
+    !proceedToAssignAccount &&
+    !verifyDataToRedeem &&
+    !showAlert
+  ">
+  <section class="col-md-12 col-xs-12">
+    <ng-template ngFor let-item [ngForOf]="DxAccountTypes">
+      <button class="btn btn-sm btn-success" style="margin-right: 5px" (click)="getAccountTypeById(item.id)">
+        {{ item.code }}
+      </button>
+    </ng-template>
+  </section>
+  <br class="" />
+  <br class="" />
+</div>
+
+<ng-container *ngIf="
+    !accepterToRedeem &&
+    !proceedToAssignAccount &&
+    !verifyDataToRedeem &&
+    !showAlert
+  ">
+  <app-master-detail-table [columnsSource]="columns" [columnsDetailSource]="columnsDetail" [dataSource]="DataSource"
+    [keySource]="'projectPlants'" [allowEditingDataSource]="false" [allowEditingDetailDataSource]="true"
+    (changedDataSource)="onChangedDataSource($event)" (changedDetailDataSource)="onChangedDetailDataSource($event)"
+    (changedSelectionDetailDataSource)="
+      onChangedSelectionDetailDataSource($event)
+    " [allowSelectDataSource]="false" [allowSelectDetailDataSource]="true"></app-master-detail-table>
+  <br class="" />
+  <h3 class="">
+    Total de certificados a redimir: {{ TotalCertificatesToRedeem }}
+  </h3>
+  <app-validator-message [error]="proccessErrors" field="totalRedeem"></app-validator-message>
+  <app-validator-message [error]="proccessErrors" field="notAvailable"></app-validator-message>
+  <app-validator-message [error]="proccessErrors" field="projectSelected"></app-validator-message>
+  <br class="" />
+  <div class="pull-left">
+    <button type="button" class="btn btn-success btn-sm" (click)="continueProcess('acceptedToRedeem')">
+      Aceptar
+    </button>
+    <br class="" />
+  </div>
+</ng-container>
+<ng-container *ngIf="
+    accepterToRedeem &&
+    !proceedToAssignAccount &&
+    !verifyDataToRedeem &&
+    !showAlert
+  ">
+  <p class="">
+    Total de certificados disponibles:
+    <strong>{{ TotalCertificatesAvailable }}</strong>
+  </p>
+  <p class="">
+    Total de certificados a redimir:
+    <strong>{{ TotalCertificatesToRedeem }}</strong>
+  </p>
+  <p class="">
+    Certificados restantes:
+    <strong>{{
+      TotalCertificatesAvailable - TotalCertificatesToRedeem
+      }}</strong>
+  </p>
+  <br class="" />
+  <div class="pull-left">
+    <button type="button" class="btn btn-success btn-sm" (click)="continueProcess('assignAccountToRedeem')">
+      ¿Continuar?</button>{{ " " }}
+    <button type="button" class="btn btn-danger btn-sm" (click)="cancelTransfer()">
+      Cancelar
+    </button>
+    <br class="" />
+  </div>
+</ng-container>
+<ng-container *ngIf="
+    !accepterToRedeem &&
+    proceedToAssignAccount &&
+    !verifyDataToRedeem &&
+    !showAlert
+  ">
+  <h4>Ingrese datos de destino:</h4>
+  <p class="">
+    <strong>¿Tiene cuenta en OCAM?</strong>
+  </p>
+  <section class="col-md-12 col-xs-12">
+    <button class="btn btn-sm btn-success" style="margin-right: 5px" (click)="setHasAccountInOcam()">
+      Sí</button>{{ " " }}
+    <button class="btn btn-sm btn-danger" style="margin-right: 5px" (click)="setHasNoAccountInOcam()">
+      No
+    </button>
+  </section>
+  <br class="" />
+  <ng-container *ngIf="hasOcamAccount === true">
+    <section class="col-md-6 col-xs-12">
+      <div class="form-group">
+        <label for="accountNumber">Numero de Cuenta <small>(##-##########)</small><i class="text-danger">*</i></label>
+        <dx-text-box #accountNumber [maskRules]="rulesAccount" [(value)]="Account.accountNumber"
+          (onEnterKey)="getAccountData($event)" (onBlur)="setAccountNumber($event)"></dx-text-box>
+      </div>
+    </section>
+    <section class="col-md-6 col-xs-12">
+      <div class="form-group">
+        <label for="beneficiary">Beneficiario<i class="text-danger">*</i></label>
+        <dx-text-box #beneficiary [(value)]="Account.beneficiary">
+        </dx-text-box>
+        <app-validator-message [error]="errorsAccount" field="beneficiary"></app-validator-message>
+      </div>
+    </section>
+  </ng-container>
+
+  <ng-container *ngIf="hasOcamAccount === false">
+    <div class="row row-space-10">
+      <section class="col-md-6 col-xs-12">
+        <div class="form-group">
+          <label for="beneficiary">Beneficiario<i class="text-danger">*</i></label>
+          <dx-text-box #beneficiary [(value)]="Model.beneficiary">
+          </dx-text-box>
+          <app-validator-message [error]="errorsAccountACH" field="beneficiary"></app-validator-message>
+        </div>
+      </section>
+      <section class="col-md-6 col-xs-12">
+        <div class="form-group">
+          <label for="beneficiaryEmail">Correo electrónico<i class="text-danger">*</i></label>
+          <dx-text-box #beneficiaryEmail [(value)]="Model.beneficiaryEmail" (onEnterKey)="getAccountData($event)">
+          </dx-text-box>
+          <app-validator-message [error]="errorsAccountACH" field="beneficiaryEmail"></app-validator-message>
+        </div>
+      </section>
+      <section class="col-md-12 col-xs-12">
+        <div class="form-group">
+          <label for="beneficiaryAddress">Dirección<i class="text-danger">*</i></label>
+          <dx-text-box #beneficiaryAddress [(value)]="Model.beneficiaryAddress">
+          </dx-text-box>
+          <app-validator-message [error]="errorsAccountACH" field="beneficiaryAddress"></app-validator-message>
+        </div>
+      </section>
+      <section class="col-md-6 col-xs-12">
+        <div class="form-group">
+          <label for="beneficiaryMinDate">Fecha inicial</label>
+          <dx-date-box displayFormat="{{ DisplayFormatDate }}" #beneficiaryMinDate type="date"
+            [value]="Model.beneficiaryMinDate">
+          </dx-date-box>
+        </div>
+      </section>
+      <section class="col-md-6 col-xs-12">
+        <div class="form-group">
+          <label for="beneficiaryMaxDate">Fecha final</label>
+          <dx-date-box displayFormat="{{ DisplayFormatDate }}" #beneficiaryMaxDate type="date"
+            [value]="Model.beneficiaryMaxDate">
+          </dx-date-box>
+        </div>
+      </section>
+    </div>
+  </ng-container>
+
+  <br class="" />
+  <div class="pull-left">
+    <button type="button" class="btn btn-success btn-sm" (click)="continueProcess('verifyData')">
+      ¿Continuar?</button>{{ " " }}
+    <button type="button" class="btn btn-danger btn-sm" (click)="cancelTransfer()">
+      Cancelar
+    </button>
+    <br class="" />
+  </div>
+</ng-container>
+<!-- summary -->
+
+<ng-container *ngIf="
+    !accepterToRedeem &&
+    !proceedToAssignAccount &&
+    verifyDataToRedeem &&
+    !showAlert
+  ">
+  <app-resume-verification-plants [projectPlants]="projectPlants" [accountType]="accountType.code"
+    [certificatesToProcess]="TotalCertificatesToRedeem" [account]="Account" [transaction]="Model"
+    [transactionType]="'redimir'">
+  </app-resume-verification-plants>
+  <br class="" />
+  <div class="pull-left">
+    <button type="button" class="btn btn-success btn-sm" (click)="continueProcess('save')">
+      Procesar</button>{{ " " }}
+    <button type="button" class="btn btn-danger btn-sm" (click)="cancelTransfer()">
+      Cancelar
+    </button>
+    <br class="" />
+  </div>
+</ng-container>
+<ng-container *ngIf="
+    !accepterToRedeem &&
+    !proceedToAssignAccount &&
+    !verifyDataToRedeem &&
+    showAlert
+  ">
+  <app-transaction-completed-uncompleted [title]="'Cancelacion'" [success]="transactionSuccess">
+  </app-transaction-completed-uncompleted>
+  <br class="" />
+  <div class="pull-left">
+    <button type="button" class="btn btn-success btn-sm" (click)="finishProcess()">
+      Finalizar proceso</button>{{ " " }}
+    <br class="" />
+  </div>
+</ng-container>

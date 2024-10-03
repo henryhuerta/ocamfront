@@ -1,0 +1,88 @@
+<app-modal-with-option-buttons #entityComponent [title]="title" [optionButtons]="OptionButtons"
+  (onOptionButton)="optionButtonClicked($event)" (onClose)="close()">
+  <div>
+    <div class="row row-space-10">
+      <section class="col-md-12 col-xs-12">
+        <div class="form-group">
+          <label for="name">Nombre<i class="text-danger">*</i></label>
+          <dx-text-box #name [(value)]="Model.name"> </dx-text-box>
+          <app-validator-message [error]="errors" field="name"></app-validator-message>
+        </div>
+      </section>
+
+      <section class="col-md-12 col-xs-12">
+        <div class="form-group">
+          <label for="description">Descripcion<i class="text-danger">*</i></label>
+          <dx-text-area #description [(value)]="Model.description">
+          </dx-text-area>
+          <app-validator-message [error]="errors" field="description"></app-validator-message>
+        </div>
+      </section>
+
+      <section class="col-md-6 col-xs-12">
+        <div class="form-group">
+          <label for="contact">Nombre Contacto<i class="text-danger">*</i></label>
+          <dx-text-box #contact [(value)]="Model.contact"> </dx-text-box>
+          <app-validator-message [error]="errors" field="contact"></app-validator-message>
+        </div>
+      </section>
+
+      <section class="col-md-6 col-xs-12">
+        <div class="form-group">
+          <label for="contactPhoneNumber">Teléfono de Contacto<i class="text-danger">*</i></label>
+          <dx-text-box #contactPhoneNumber [(value)]="Model.contactPhoneNumber">
+          </dx-text-box>
+          <app-validator-message [error]="errors" field="contactPhoneNumber"></app-validator-message>
+        </div>
+      </section>
+
+      <section class="col-md-6 col-xs-12">
+        <div class="form-group">
+          <label for="contactEmail">Correo de contacto<i class="text-danger">*</i></label>
+          <dx-text-box #contactEmail [(value)]="Model.contactEmail">
+          </dx-text-box>
+          <app-validator-message [error]="errors" field="contactEmail"></app-validator-message>
+        </div>
+      </section>
+
+      <!-- <section class="col-md-6 col-xs-12">
+                <div class="form-group">
+                    <label for="textBox">TextBox<i class="text-danger">*</i></label>
+                    <dx-text-box #textBox [(value)]="Model.textBox">
+                    </dx-text-box>
+                    <app-validator-message [error]="errors" field="name"></app-validator-message>
+                </div>
+            </section> -->
+
+      <!-- <section class="col-md-6 col-xs-12">
+                <div class="form-group">
+                    <label for="numberBox">NumberBox</label>
+                    <dx-number-box id="numberBox" name="numberBox" [(value)]="Model.numberBox" placeholder=""
+                        type="number">
+                    </dx-number-box>
+                    <app-validator-message [error]="errors" field="numberBox"></app-validator-message>
+                </div>
+            </section> -->
+
+      <!-- <section class="col-md-6 col-xs-12">
+                <div class="form-group">
+                    <label for="dateBox">DateBox</label>
+                    <dx-date-box displayFormat="{{ DisplayFormatDate }}" #dateBox type="date">
+                    </dx-date-box>
+                    <app-validator-message [error]="errors" field="dateBox">
+                    </app-validator-message>
+                </div>
+            </section> -->
+
+      <!-- <section class="col-md-6 col-xs-12">
+                <div class="form-group">
+                    <label for="selectId">SelectBox</label>
+                    <dx-select-box displayExpr="text" valueExpr="value" [searchEnabled]="true"
+                        [dataSource]="DxSelectBoxData" [(value)]="Model.selectId">
+                    </dx-select-box>
+                    <app-validator-message [error]="errors" field="selectId"></app-validator-message>
+                </div>
+            </section> -->
+    </div>
+  </div>
+</app-modal-with-option-buttons>

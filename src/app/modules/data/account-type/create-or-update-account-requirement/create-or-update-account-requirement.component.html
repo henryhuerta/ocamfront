@@ -1,0 +1,25 @@
+<app-modal-with-option-buttons
+  #entityComponent
+  [title]="title"
+  [optionButtons]="OptionButtons"
+  (onOptionButton)="optionButtonClicked($event)"
+  (onClose)="close()"
+>
+  <div>
+    <div class="row row-space-10">
+      <section class="col-md-12 col-xs-12">
+        <div class="form-group">
+          <label for="requirement"
+            >Requerimiento<i class="text-danger">*</i></label
+          >
+          <dx-text-box #requirement [(value)]="Model.requirement">
+          </dx-text-box>
+          <app-validator-message
+            [error]="errors"
+            field="requirement"
+          ></app-validator-message>
+        </div>
+      </section>
+    </div>
+  </div>
+</app-modal-with-option-buttons>

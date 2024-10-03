@@ -1,0 +1,59 @@
+<div class="row row-space-10 mb-1">
+  <section class="col-xs-12 col-md-1">
+    <button class="btn" (click)="onClickDelete()">
+      <i class="fa fa-trash text-danger"></i>
+    </button>
+  </section>
+  <section class="col-xs-12 col-md-4">
+    <div class="form-group">
+      <dx-text-box placeholder="Nombre" #name [(value)]="Model.name">
+        <dx-validator>
+          <dxi-validation-rule
+            type="required"
+            message="Nombre requerido"
+          ></dxi-validation-rule>
+        </dx-validator>
+      </dx-text-box>
+      <app-validator-message
+        [error]="errors"
+        field="name"
+      ></app-validator-message>
+    </div>
+  </section>
+  <section class="col-xs-12 col-md-4">
+    <div class="form-group">
+      <dx-text-box placeholder="Ubicación" #location [(value)]="Model.location">
+        <dx-validator>
+          <dxi-validation-rule
+            type="required"
+            message="Ubicación requerida"
+          ></dxi-validation-rule>
+        </dx-validator>
+      </dx-text-box>
+      <app-validator-message
+        [error]="errors"
+        field="location"
+      ></app-validator-message>
+    </div>
+  </section>
+  <section class="col-xs-12 col-md-3">
+    <div class="form-group">
+      <dx-text-box
+        placeholder="Código de entrega"
+        #deliveryCode
+        [(value)]="Model.deliveryCode"
+      >
+        <dx-validator>
+          <dxi-validation-rule
+            type="required"
+            message="Código de entrega requerido"
+          ></dxi-validation-rule>
+        </dx-validator>
+      </dx-text-box>
+      <app-validator-message
+        [error]="errors"
+        field="deliveryCode"
+      ></app-validator-message>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,28 @@
+<div class="row" style="width: 100%;">
+  <div class="col-xs-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="row">
+      <div class="col-md-4">
+        <app-panel title="Menú de opciones">
+            <section *ngFor="let req of requestTypesSource">
+              <p>{{ req.name }}</p>
+              <button (click)="goToCreateRequest(req)" class="btn btn-light-success ng-tns-c74-0"> Verificar </button>
+            </section>
+          <br class="" />
+        </app-panel>
+      </div>
+      <div class="col-md-8">
+
+        <app-panel [title]="SubTitle">
+          <div class="content-create">
+            <router-outlet></router-outlet>
+          </div>
+        </app-panel>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <dx-data-grid noDataText="" height="30"></dx-data-grid>
+</div>

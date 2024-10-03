@@ -1,0 +1,90 @@
+<app-modal-with-option-buttons #entityComponent [optionButtons]="OptionButtons"
+  (onOptionButton)="optionButtonClicked($event)" [title]="title" (onClose)="close()">
+  <div class="table-responsive">
+    <div class="d-flex flex-wrap">
+      <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+        <div class="d-flex align-items-center"><span class="svg-icon svg-icon-3 svg-icon-success me-2"></span>
+          <div class="fs-2 fw-bolder">{{Model.totalCertificates}}</div>
+        </div>
+        <div class="fw-bold fs-6 text-gray-400">TOTAL CONTADO</div>
+      </div>
+      <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+        <div class="d-flex align-items-center"><span class="svg-icon svg-icon-3 svg-icon-success me-2"></span>
+
+          <div class="fs-2 fw-bolder">{{Model.availableCertificates}}</div>
+        </div>
+        <div class="fw-bold fs-6 text-gray-400">TOTAL DISPONIBLE</div>
+      </div>
+      <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+        <div class="d-flex align-items-center"><span class="svg-icon svg-icon-3 svg-icon-success me-2"></span>
+
+          <div class="fs-2 fw-bolder">{{Transactions.length}}</div>
+        </div>
+        <div class="fw-bold fs-6 text-gray-400">TOTAL TRANSACCIONES</div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <td>
+            <h4>Tran. ID</h4>
+          </td>
+          <td>
+            <h4>Tipo</h4>
+          </td>
+          <td>
+            <h4>Fecha/Hora</h4>
+          </td>
+          <td>
+            <h4># Cuenta o Beneficiario.</h4>
+          </td>
+          <td>
+            <h4>Cantidad</h4>
+          </td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let trans of Transactions">
+          <td>
+            <div class="d-flex justify-content-start flex-column"><span
+                class="text-muted fw-bold text-muted d-block fs-7"> {{trans.transactionNumber}} </span>
+            </div>
+          </td>
+          <td class="text-center">
+            <span class="badge" [ngClass]="{ 'badge-success': trans.transactionTypeValue=='Transferencia',
+               'badge-warning': trans.transactionTypeValue=='Redencion',
+               'badge-danger': trans.transactionTypeValue=='Cancelacion'}"> {{trans.transactionTypeValue}}</span>
+          </td>
+          <td>
+            <div class="d-flex justify-content-start flex-column"><span
+                class="text-muted fw-bold text-muted d-block fs-7"> {{trans.transactionDateTime | date:'short'}}</span>
+            </div>
+          </td>
+          <td>
+            <div class="d-flex justify-content-start flex-column"><span
+                class="text-muted fw-bold text-muted d-block fs-7"> {{trans.accountNumber }}</span></div>
+          </td>
+          <td>
+            <span *ngIf="trans.subtract" class="fw-bold text-danger text-right">
+              (-{{trans.transactionQuantity}})</span>
+            <span *ngIf="!trans.subtract" class="fw-bold text-success text-right">
+              +{{trans.transactionQuantity}}</span>
+          </td>
+          <td>
+            <div class="d-flex justify-content-end flex-shrink-0">
+              <button class="btn btn-default btn-sm"
+                (click)="printTransaction(trans.transactionNumber, trans.transactionTypeValue)"><span
+                  class="fa fa-print">
+                </span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</app-modal-with-option-buttons>

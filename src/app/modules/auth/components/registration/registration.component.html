@@ -1,0 +1,813 @@
+<div class="row row-space-10">
+  <section class="col-md-12 col-xs-12 mb-11" *ngIf="!profile">
+    <h1 class="text-dark fw-bolder mb-3 text-center">
+      Registro de nueva cuenta
+    </h1>
+  </section>
+  <section class="col-md-12 col-xs-12 mb-11"*ngIf="profile">
+    <h1 class="text-dark fw-bolder mb-3 text-center">
+      Editar cuenta
+    </h1>
+  </section>
+  <br />
+  <br />
+  <section class="col-md-12 col-xs-12">
+    <h3 class="text-dark fw-bolder mb-3 text-center">Datos de la empresa</h3>
+  </section>
+  <br />
+  <div class="row row-space-10">
+    <section class="col-md-12 col-xs-12 mb-2">
+      <div class="form-group">
+        <dx-text-box
+          requiredMark="*"
+          placeholder="Nombre"
+          #businessName
+          [(value)]="Model.businessName"
+        >
+          <dx-validator>
+            <dxi-validation-rule
+              type="required"
+              message="Nombre requerido"
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+        <app-validator-message
+          [error]="errors"
+          field="businessName"
+        ></app-validator-message>
+      </div>
+    </section>
+    <section class="col-md-4 col-xs-12 mb-2">
+      <div class="form-group">
+        <dx-text-box placeholder="RUC" #str [(value)]="Model.str">
+          <dx-validator>
+            <dxi-validation-rule
+              type="required"
+              message="RUC requerido"
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+        <app-validator-message
+          [error]="errors"
+          field="str"
+        ></app-validator-message>
+      </div>
+    </section>
+    <section class="col-md-4 col-xs-12 mb-2">
+      <div class="form-group">
+        <dx-text-box
+          placeholder="Teléfono"
+          #businessPhone
+          [(value)]="Model.businessPhone"
+        >
+          <dx-validator>
+            <dxi-validation-rule
+              type="required"
+              message="Teléfono requerido"
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+        <app-validator-message
+          [error]="errors"
+          field="businessPhone"
+        ></app-validator-message>
+      </div>
+    </section>
+    <section class="col-md-4 col-xs-12 mb-2">
+      <div class="form-group">
+        <dx-select-box
+        placeholder="País"
+        #businessCountry
+        displayExpr="name"
+        valueExpr="code"
+        [searchEnabled]="true"
+        [dataSource]="DxDataSourceCountries"
+        [(value)]="Model.businessCountry"
+      >
+      </dx-select-box>
+      <dx-validator>
+        <dxi-validation-rule
+          type="required"
+          message="País requerido"
+        ></dxi-validation-rule>
+      </dx-validator>
+      </div>
+    </section>
+    <section class="col-md-8 col-xs-12 mb-2">
+      <div class="form-group">
+        <dx-text-box
+          placeholder="Dirección Fiscal"
+          #businessAddress
+          [(value)]="Model.businessAddress"
+        >
+          <dx-validator>
+            <dxi-validation-rule
+              type="required"
+              message="Dirección fiscal requerida"
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+        <app-validator-message
+          [error]="errors"
+          field="businessAddress"
+        ></app-validator-message>
+      </div>
+    </section>
+    <!-- <section class="col-md-4 col-xs-12 mb-2">
+      <div class="form-group">
+        <dx-select-box
+          placeholder="Tipo de cuenta"
+          displayExpr="text"
+          valueExpr="value"
+          [searchEnabled]="true"
+          [dataSource]="DxDataSourceUserTypes"
+          [(value)]="Model.userType"
+        >
+        </dx-select-box>
+        <app-validator-message
+          [error]="errors"
+          field="userType"
+        ></app-validator-message>
+      </div>
+    </section> -->
+    <section class="col-md-4 col-xs-12" *ngIf="Model.userType === 2">
+      <div class="form-group">
+        <dx-number-box
+          id="plantsQty"
+          name="plantsQty"
+          [(value)]="Model.plantsQty"
+          placeholder="Cantidad de plantas"
+          type="number"
+        >
+        </dx-number-box>
+        <app-validator-message
+          [error]="errors"
+          field="plantsQty"
+        ></app-validator-message>
+      </div>
+    </section>
+    <div class="col text-success" *ngIf="Model.userType === 2">
+      <button
+        type="button"
+        class="btn btn-link"
+        (click)="addPlant()"
+        [disabled]="Model.plantsQty === 0 || !Model.plantsQty"
+      >
+        <i class="fa fa-plus text-success"></i> Agregar planta
+      </button>
+    </div>
+  </div>
+  <br class="" />
+  <div
+    class="row row-space-10"
+    *ngIf="
+      Model.applicationPlantTemporaries &&
+      Model.applicationPlantTemporaries.length > 0
+    "
+  >
+    <app-plants-temporary
+      *ngFor="let plant of Model.applicationPlantTemporaries; let i = index"
+      [Model]="plant"
+      [index]="i"
+      (onDelete)="deletePlant($event)"
+    ></app-plants-temporary>
+    <app-validator-message
+      [error]="errors"
+      field="applicationPlantTemporaries"
+    ></app-validator-message>
+    <app-validator-message
+      [error]="errors"
+      field="applicationPlantTemporariesName"
+    ></app-validator-message>
+    <app-validator-message
+      [error]="errors"
+      field="applicationPlantTemporariesDeliveryCode"
+    ></app-validator-message>
+    <br class="" />
+    <br class="" />
+  </div>
+  <br class="" />
+  <section class="col-md-12 col-xs-12">
+    <h3 class="text-dark fw-bolder mb-3 text-center">Representante Legal</h3>
+  </section>
+  <br />
+  <div class="row row-space-10">
+    <section class="col-md-6 col-xs-12 mb-2">
+      <div class="form-group">
+        <dx-text-box
+          placeholder="Nombre"
+          #legalRepresentativeFirstName
+          [(value)]="Model.legalRepresentativeFirstName"
+        >
+          <dx-validator>
+            <dxi-validation-rule
+              type="required"
+              message="Nombre requerido"
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+        <app-validator-message
+          [error]="errors"
+          field="legalRepresentativeFirstName"
+        ></app-validator-message>
+      </div>
+    </section>
+    <section class="col-md-6 col-xs-12 mb-2">
+      <div class="form-group">
+        <dx-text-box
+          placeholder="Apellido"
+          #legalRepresentativeSurname
+          [(value)]="Model.legalRepresentativeSurname"
+        >
+          <dx-validator>
+            <dxi-validation-rule
+              type="required"
+              message="Apellido requerido"
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+        <app-validator-message
+          [error]="errors"
+          field="legalRepresentativeSurname"
+        ></app-validator-message>
+      </div>
+    </section>
+  </div>
+  <br class="" />
+  <section class="col-md-12 col-xs-12">
+    <h3 class="text-dark fw-bolder mb-3 text-center">
+      Administrador de la cuenta
+    </h3>
+  </section>
+  <br />
+  <div class="row row-space-10">
+    <section class="col-md-6 col-xs-12 mb-2">
+      <div class="form-group">
+        <dx-text-box
+          placeholder="Nombre"
+          #firstName
+          [(value)]="Model.firstName"
+        >
+          <dx-validator>
+            <dxi-validation-rule
+              type="required"
+              message="Nombre requerido"
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+        <app-validator-message
+          [error]="errors"
+          field="firstName"
+        ></app-validator-message>
+      </div>
+    </section>
+    <section class="col-md-6 col-xs-12 mb-2">
+      <div class="form-group">
+        <dx-text-box
+          placeholder="Apellido"
+          #lastName
+          [(value)]="Model.lastName"
+        >
+          <dx-validator>
+            <dxi-validation-rule
+              type="required"
+              message="Apellido requerido"
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+        <app-validator-message
+          [error]="errors"
+          field="lastName"
+        ></app-validator-message>
+      </div>
+    </section>
+    <section class="col-md-6 col-xs-12 mb-2">
+      <div class="form-group">
+        <dx-text-box placeholder="Cargo" #position [(value)]="Model.position">
+        </dx-text-box>
+      </div>
+    </section>
+    <section class="col-md-6 col-xs-12 mb-2">
+      <div class="form-group">
+        <dx-text-box
+          placeholder="Teléfono"
+          #phoneNumber
+          [(value)]="Model.phoneNumber"
+        >
+          <dx-validator>
+            <dxi-validation-rule
+              type="required"
+              message="Teléfono requerido"
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+        <app-validator-message
+          [error]="errors"
+          field="phoneNumber"
+        ></app-validator-message>
+      </div>
+    </section>
+    <section class="col-md-6 col-xs-12 mb-2" *ngIf="profile">
+      <div class="form-group">
+        <dx-text-box
+          placeholder="Correo o Usuario"
+          #email
+          [(value)]="Model.email"
+          [readOnly]="true"
+        >
+          <dx-validator>
+            <dxi-validation-rule
+              type="required"
+              message="Correo requerido"
+            ></dxi-validation-rule>
+            <dxi-validation-rule
+              type="email"
+              message="Correo invalido"
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+        <app-validator-message
+          [error]="errors"
+          field="email"
+        ></app-validator-message>
+      </div>
+    </section>
+    <section class="col-md-6 col-xs-12 mb-2" *ngIf="!profile">
+      <div class="form-group">
+        <dx-text-box
+          placeholder="Correo o Usuario"
+          #email
+          [(value)]="Model.email"
+        >
+          <dx-validator>
+            <dxi-validation-rule
+              type="required"
+              message="Correo requerido"
+            ></dxi-validation-rule>
+            <dxi-validation-rule
+              type="email"
+              message="Correo invalido"
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+        <app-validator-message
+          [error]="errors"
+          field="email"
+        ></app-validator-message>
+      </div>
+    </section>
+    <section class="col-md-6 col-xs-12 mb-2" *ngIf="!profile">
+      <div class="form-group">
+        <dx-text-box
+          mode="password"
+          placeholder="Contraseña"
+          #password
+          [(value)]="Model.password"
+        >
+          <dx-validator>
+            <dxi-validation-rule
+              type="required"
+              message="Contraseña requerida"
+            ></dxi-validation-rule>
+          </dx-validator>
+        </dx-text-box>
+        <app-validator-message
+          [error]="errors"
+          field="password"
+        ></app-validator-message>
+      </div>
+    </section>
+    <section class="col-md-6 col-xs-12 mb-2" *ngIf="!profile">
+      <div class="form-group">
+        <dx-text-box
+          mode="password"
+          placeholder="Confirmar Contraseña"
+          #password
+          [(value)]="Model.confirmPassword"
+          (textChange)="confirmPassword($event)"
+        >
+        </dx-text-box>
+        <app-validator-message
+          [error]="errorPassword"
+          field="confirmPassword"
+        ></app-validator-message>
+      </div>
+    </section>
+  </div>
+  <br class="" />
+  <br class="" />
+
+  <div *ngIf="profile">
+    <section class="col-md-12 col-xs-12">
+      <button
+        type="button"
+        class="btn btn-link" style="text-align:center;" (click)="divResumenFunction()"
+      >
+        <h3 class="text-dark fw-bolder mb-3 text-center">
+          <i class="fa fa-plus text-success"></i>Cambiar contraseña</h3>
+      </button>
+    </section>
+    <br />
+    <div class="row row-space-10" *ngIf="divChangePassword">
+      <section class="col-md-6 col-xs-12 mb-2">
+        <div class="form-group">
+          <dx-text-box
+            mode="password"
+            placeholder="Contraseña"
+            #password
+            [(value)]="Model.password"
+          >
+            <dx-validator>
+              <dxi-validation-rule
+                type="required"
+                message="Contraseña requerida"
+              ></dxi-validation-rule>
+            </dx-validator>
+          </dx-text-box>
+          <app-validator-message
+            [error]="errors"
+            field="password"
+          ></app-validator-message>
+        </div>
+      </section>
+      <section class="col-md-6 col-xs-12 mb-2">
+        <div class="form-group">
+          <dx-text-box
+            mode="password"
+            placeholder="Confirmar Contraseña"
+            #password
+            [(value)]="Model.confirmPassword"
+            (textChange)="confirmPassword($event)"
+          >
+          </dx-text-box>
+          <app-validator-message
+            [error]="errorPassword"
+            field="confirmPassword"
+          ></app-validator-message>
+        </div>
+      </section>
+      <div class="col-md-12 text-center">
+        <br class="" />
+        <button
+          type="button"
+          class="btn btn-success btn-sm"
+          [disabled]="!validPassword"
+          (click)="changePassword()"
+        >
+          CAMBIAR CONTRASEÑA
+        </button>
+      </div>
+    </div>
+  </div>
+  <br class="" />
+  <br class="" />
+
+  <div class="col-md-12 text-center">
+    <br class="" />
+    <button
+      type="button"
+      class="btn btn-primary btn-sm"
+      (click)="save()"
+      *ngIf="!profile"
+    >
+      REGISTRARME
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary btn-sm"
+      (click)="update()"
+      *ngIf="profile"
+    >
+      GUARDAR
+    </button>
+    <br class="" />
+    <br class="" />
+    <div class="text-gray-500 text-center fw-semibold fs-6" *ngIf="!profile">
+      ¿Ya tienes una cuenta?
+      <a routerLink="/auth/login" class="link-primary fw-semibold">
+        Iniciar Sesión
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- <form
+  class="form w-100"
+  novalidate="novalidate"
+  id="kt_login_signup_form"
+  [formGroup]="registrationForm"
+  (ngSubmit)="submit()"
+> -->
+<!-- <div class="text-center mb-11">
+    <h1 class="text-dark fw-bolder mb-3">Registro de nueva cuenta</h1>
+  </div>
+
+  <ng-container *ngIf="hasError">
+    <div class="mb-lg-15 alert alert-danger">
+      <div class="alert-text font-weight-bold">
+        The registration details are incorrect
+      </div>
+    </div>
+  </ng-container> -->
+<!-- end::Alert error-->
+
+<!--begin::Form group-->
+<!-- <div class="row mb-8">
+    <h2 class="">Datos de la empresa</h2>
+  </div> -->
+<!-- <div class="row">
+    <div class="col-xs-12 col-md-12 mb-8">
+      <div class="col-xs-12 col-md-4">
+        <input
+          class="form-control bg-transparent"
+          type="text"
+          name="businessName"
+          formControlName="businessName"
+          placeholder="Nombre"
+          autocomplete="off"
+          [ngClass]="{
+            'is-invalid': registrationForm.controls['businessName'].invalid,
+            'is-valid': registrationForm.controls['businessName'].valid
+          }"
+        />
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Requerido',
+            control: registrationForm.controls['businessName']
+          }"
+        ></ng-container>
+      </div>
+      <div class="col-xs-12 col-md-4">
+        <input
+          class="form-control bg-transparent"
+          type="text"
+          name="str"
+          formControlName="str"
+          placeholder="RUC"
+          autocomplete="off"
+          [ngClass]="{
+            'is-invalid': registrationForm.controls['str'].invalid,
+            'is-valid': registrationForm.controls['str'].valid
+          }"
+        />
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Requerido',
+            control: registrationForm.controls['str']
+          }"
+        ></ng-container>
+      </div>
+      <div class="col-xs-12 col-md-4">
+        <input
+          class="form-control bg-transparent"
+          type="text"
+          name="businessPhone"
+          formControlName="businessPhone"
+          placeholder="Telefono"
+          autocomplete="off"
+          [ngClass]="{
+            'is-invalid': registrationForm.controls['businessPhone'].invalid,
+            'is-valid': registrationForm.controls['businessPhone'].valid
+          }"
+        />
+        <ng-container
+          [ngTemplateOutlet]="formError"
+          [ngTemplateOutletContext]="{
+            validation: 'required',
+            message: 'Requerido',
+            control: registrationForm.controls['businessPhone']
+          }"
+        ></ng-container>
+      </div>
+    </div>
+  </div> -->
+
+<!--end::Form group-->
+
+<!--begin::Form group-->
+<!-- <div class="fv-row mb-8">
+    <label class="form-label fw-bolder text-dark fs-6">Email</label>
+    <input
+      class="form-control bg-transparent"
+      type="email"
+      placeholder="Email"
+      name="email"
+      formControlName="email"
+      autocomplete="off"
+      [ngClass]="{
+        'is-invalid': registrationForm.controls['email'].invalid,
+        'is-valid': registrationForm.controls['email'].valid
+      }"
+    />
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Email is required',
+        control: registrationForm.controls['email']
+      }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'email',
+        message: 'Email is invalid',
+        control: registrationForm.controls['email']
+      }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'minlength',
+        message: 'Email should have at least 3 symbols',
+        control: registrationForm.controls['email']
+      }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'maxLength',
+        message: 'Email should have maximum 360 symbols',
+        control: registrationForm.controls['email']
+      }"
+    ></ng-container>
+  </div> -->
+<!--end::Form group-->
+
+<!--begin::Form group-->
+<!-- <div class="fv-row mb-8">
+    <label class="form-label fw-bolder text-dark fs-6">Password</label>
+    <input
+      class="form-control bg-transparent"
+      type="password"
+      placeholder="Password"
+      name="password"
+      formControlName="password"
+      autocomplete="off"
+      [ngClass]="{
+        'is-invalid': registrationForm.controls['password'].invalid,
+        'is-valid': registrationForm.controls['password'].valid
+      }"
+    />
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Password is required',
+        control: registrationForm.controls['password']
+      }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'minlength',
+        message: 'Password should have at least 3 symbols',
+        control: registrationForm.controls['password']
+      }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'maxLength',
+        message: 'Password should have maximum 100 symbols',
+        control: registrationForm.controls['password']
+      }"
+    ></ng-container>
+  </div> -->
+<!--end::Form group-->
+
+<!--begin::Form group-->
+<!-- <div class="fv-row mb-8">
+    <label class="form-label fw-bolder text-dark fs-6">Confirm Password</label>
+    <input
+      class="form-control bg-transparent"
+      type="password"
+      placeholder="Confirm password"
+      name="cPassword"
+      autocomplete="off"
+      formControlName="cPassword"
+      [ngClass]="{
+        'is-invalid': registrationForm.controls['cPassword'].invalid,
+        'is-valid': registrationForm.controls['cPassword'].valid
+      }"
+    />
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Confirm Password is required',
+        control: registrationForm.controls['cPassword']
+      }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'minlength',
+        message: 'Confirm Password should have at least 3 symbols',
+        control: registrationForm.controls['cPassword']
+      }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="formError"
+      [ngTemplateOutletContext]="{
+        validation: 'maxLength',
+        message: 'Confirm Password should have maximum 100 symbols',
+        control: registrationForm.controls['cPassword']
+      }"
+    ></ng-container>
+    <ng-container
+      *ngIf="
+        registrationForm.controls['cPassword'].errors &&
+        registrationForm.controls['cPassword'].errors.ConfirmPassword
+      "
+    >
+      <div class="fv-plugins-message-container">
+        <div class="fv-help-block">
+          'Passsword' and 'Confirm Password' didn't match.
+        </div>
+      </div>
+    </ng-container>
+  </div> -->
+<!--end::Form group-->
+
+<!--begin::Form group-->
+<!-- <div class="fv-row mb-8">
+    <label class="form-check form-check-inline">
+      <input
+        id="kt_login_toc_agree"
+        type="checkbox"
+        formControlName="agree"
+        name="agree"
+        class="form-check-input"
+      />
+      <span
+        for="kt_login_toc_agree"
+        class="form-check-label fw-semibold text-gray-700 fs-base ms-1"
+      >
+        I Accept the&nbsp;<a
+          href="https://keenthemes.com/metronic/?page=faq"
+          target="_blank"
+          class="ms-1 link-primary"
+          >Terms</a
+        >.
+      </span>
+    </label>
+  </div> -->
+<!--end::Form group-->
+
+<!--begin::Form group-->
+<!-- <div class="d-grid mb-10">
+    <button
+      type="submit"
+      id="kt_sign_up_submit"
+      [disabled]="
+        registrationForm.invalid || !registrationForm.controls['agree'].value
+      "
+      class="btn btn-primary"
+    >
+      <ng-container *ngIf="(isLoading$ | async) === false">
+        <span class="indicator-label">Submit</span>
+      </ng-container>
+      <ng-container *ngIf="isLoading$ | async">
+        <span class="indicator-progress" [style.display]="'block'">
+          Please wait...
+          <span
+            class="spinner-border spinner-border-sm align-middle ms-2"
+          ></span>
+        </span>
+      </ng-container>
+    </button>
+  </div> -->
+<!--end::Form group-->
+
+<!--begin::Sign up-->
+<!-- <div class="text-gray-500 text-center fw-semibold fs-6">
+    Already have an Account?
+
+    <a routerLink="/auth/login" class="link-primary fw-semibold"> Sign in </a>
+  </div> -->
+<!--end::Sign up-->
+<!-- </form> -->
+
+<!-- <ng-template
+  #formError
+  let-control="control"
+  let-message="message"
+  let-validation="validation"
+>
+  <ng-container
+    *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+  >
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        <span role="alert">
+          {{ message }}
+        </span>
+      </div>
+    </div>
+  </ng-container> -->
+<!-- </ng-template> -->

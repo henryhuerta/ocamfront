@@ -1,0 +1,69 @@
+<div class="row">
+
+  <section class="col-md-12">
+    <div class="form-group">
+      <label for="certifierId">Certificadoras</label>
+      <dx-select-box displayExpr="name" valueExpr="id" [searchEnabled]="true" [dataSource]="DxDataSourceCertifiers"
+        (onItemClick)="onItemClickCertifier($event.itemData)">
+      </dx-select-box>
+      <app-validator-message [error]="errors" field="accountTypeId"></app-validator-message>
+    </div>
+    <section>
+      <strong>Contacto: </strong> {{Certifier.name}}<br />
+      <strong>Correo Electrónico: </strong> {{Certifier.contactEmail}}<br />
+      <strong>Teléfono: </strong> {{Certifier.contactPhoneNumber}}<br />
+      <p>{{Certifier.description}}</p>
+    </section>
+    <br />
+  </section>
+
+</div>
+<div class="row">
+
+  <section class="col-xs-12 text-center text-info">
+    <h1>Registra tu proyecto en OCAM</h1>
+  </section>
+
+  <section class="col-xs-12">
+    <h3>¿Qué tipo de proyecto desea registrar?</h3>
+  </section>
+
+  <section class="col-md-12 col-xs-12">
+
+    <ng-template ngFor let-item [ngForOf]="DxAccountTypes">
+
+      <button class="btn btn-success" style="margin-right: 5px;" (click)="getAccountTypeById(item.id)">
+        {{item.code}}
+      </button>
+
+    </ng-template>
+
+  </section>
+
+
+</div>
+
+<br class="" />
+
+<div class="row row-space-10" *ngIf="Model.accountTypeId > 0">
+
+  <section class="col-md-12" *ngFor="let doc of documentsAllowed; let i = index">
+    <div class="custom-file-input">
+      <label for="formFile" class="form-label">Adjuntar {{ doc.name }}</label>
+      <input class="form-control" type="file" id="formFile" (change)="uploadFile($event, doc.name, doc.id)" />
+      <small>
+        <i class="text-danger">**</i><i class="text-gray">Extensiones permitidas:
+          {{ doc.extensionsAllowed }}
+        </i>
+      </small>
+    </div>
+  </section>
+
+  <div class="form-group">
+    <br />
+    <button type="button" class="btn btn-success" (click)="save()">
+      ENVIAR DOCUMENTOS PARA APROBACIÓN
+    </button>
+  </div>
+
+</div>

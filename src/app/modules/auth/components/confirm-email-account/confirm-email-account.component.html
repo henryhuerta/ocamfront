@@ -1,0 +1,33 @@
+<div *ngIf="errorToken; else error">
+  <ng-container #exito>
+    <div class="mb-10 bg-light-info p-8 rounded">
+      <!--begin::Body-->
+      <div class="text-info">Su confirmación ha sido exitosa</div>
+      <br>
+      <div class="text-info">Presione el botón para ir al inicio de sesión</div>
+      <!--end::Body-->
+      <br>
+      <div class="text-center">
+      <button type="button" (click)="goToLogin()" class="btn btn-secondary btn-sm">Iniciar sesión</button>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+
+<ng-template #error>
+
+  <ng-container >
+    <div class="mb-10 bg-light-info p-8 rounded">
+      <!--begin::Body-->
+      <div class="text-info">Token no valido</div>
+      <br>
+
+      <!--end::Body-->
+      <br>
+      <div class="text-center">
+      <button type="button" (click)="goToLogin()" class="btn btn-secondary btn-sm">Iniciar sesión</button>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

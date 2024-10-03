@@ -1,0 +1,83 @@
+<app-modal-with-option-buttons #entityComponent [optionButtons]="OptionButtons"
+  (onOptionButton)="optionButtonClicked($event)" [title]="title" (onClose)="close()">
+  <div class="table-responsive">
+    <br>
+    <br>
+    <div class="border border-gray-300 border-dashed rounded min-w-125px">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <td>
+              <h4>Tipo de cuenta</h4>
+            </td>
+            <td>
+              <h4>No. Cuenta</h4>
+            </td>
+            <td>
+              <h4>Cert. Totales</h4>
+            </td>
+            <td>
+              <h4>Cert. Disponibles</h4>
+            </td>
+            <td>
+              <h4>Cert. Spot</h4>
+            </td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let trans of DataSource">
+            <td>
+              <div class="d-flex justify-content-start flex-column"><span
+                  class="text-muted fw-bold text-muted d-block fs-7"> {{trans.accountTypeName}} </span>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="d-flex justify-content-start flex-column"><span
+                class="text-muted fw-bold text-muted d-block fs-7"> {{trans.accountNumber}} </span>
+            </div>
+            </td>
+            <td>
+              <div class="d-flex justify-content-start flex-column"><span
+                class="text-muted fw-bold text-muted d-block fs-7"> {{trans.certificatesApproved}} </span>
+            </div>
+            </td>
+            <td>
+              <div class="d-flex justify-content-start flex-column"><span
+                class="text-muted fw-bold text-muted d-block fs-7"> {{trans.certificatesAvailable}} </span>
+            </div>
+            </td>
+            <td>
+              <div class="d-flex justify-content-start flex-column"><span
+                class="text-muted fw-bold text-muted d-block fs-7"> {{trans.certificatesSpot}} </span>
+            </div>
+            </td>
+            <td>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+  <app-master-detail-template [onEditorPreparing]="onEditorPreparing" #detailComp (changedData)="changeData($event)"  [columns]="columnsDetail" [dataSource]="DataSourceDetail" [allowEditingDataSource]="true">
+  </app-master-detail-template>
+
+  <ng-container *ngIf="hasError">
+    <div class="mt-5 mb-lg-15 alert alert-danger">
+      <div class="alert-text font-weight-bold">
+        No se permite ingresar valor de spot mayor al disponible.
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="hasNegativeError">
+    <div class="mt-5 mb-lg-15 alert alert-danger">
+      <div class="alert-text font-weight-bold">
+        No se permite ingresar valor negativo.
+      </div>
+    </div>
+  </ng-container>
+
+</app-modal-with-option-buttons>

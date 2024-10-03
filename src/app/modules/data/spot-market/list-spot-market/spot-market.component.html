@@ -1,0 +1,66 @@
+<div _ngcontent-sto-c63="" id="kt_content" class="content d-flex flex-column flex-column-fluid">
+  <div _ngcontent-sto-c63="" id="kt_post" class="post d-flex flex-column-fluid">
+    <div _ngcontent-sto-c68="" class="row gy-5 col-xl-12 ng-tns-c68-0">
+      <div _ngcontent-sto-c68="" class="col-xl-12 ng-tns-c68-0 ng-trigger ng-trigger-fadeIn ng-star-inserted">
+        <div _ngcontent-sto-c68="" class="card card-xxl-stretch mb-5 mb-xl-12 ng-tns-c68-0">
+          <div _ngcontent-sto-c68="" class="card-header border-0 pt-5 ng-tns-c68-0">
+            <h3 _ngcontent-sto-c68="" class="card-title align-items-start flex-column ng-tns-c68-0">
+              <span _ngcontent-sto-c68="" class="card-label fw-bolder fs-3 mb-1 ng-tns-c68-0">Mercado Spot</span>
+            </h3>
+          </div>
+          <div *ngFor="let type of accountType" _ngcontent-sto-c68="" class="card-body py-3 border-0 ng-tns-c68-0">
+            <div _ngcontent-sto-c68="" class="d-flex align-items-center bg-success rounded p-5 mb-7 ng-tns-c68-0"
+            style="background-color: #4fb136 !important;">
+              <div _ngcontent-sto-c68="" class="flex-grow-1 me-2 ng-tns-c68-0">
+                <a _ngcontent-sto-c68="" class="fw-bolder text-gray-800 text-hover-primary fs-6 ng-tns-c68-0">
+                  {{type.name}}
+                </a>
+              </div>
+              <button type="button" class="ng-tns-c50-2 btn btn-secondary btn-block btn-sm"
+                (click)="viewSetup(type.id)">
+                Configurar
+              </button>
+            </div>
+            <div *ngFor="let data of getDetailByAccount(type.id)" _ngcontent-sto-c68=""
+              class="col-xl-8 ng-tns-c68-0 ng-trigger ng-trigger-fadeIn ng-star-inserted">
+              <div _ngcontent-sto-c68="" class="card card-xxl-stretch mb-5 mb-xl-12 ng-tns-c68-0">
+                <div _ngcontent-sto-c68="" class="card-header border-0 pt-5 ng-tns-c68-0">
+                  <span _ngcontent-sto-c68=""
+                    class="card-label fw-bolder card-title align-items-start flex-column ng-tns-c68-0">Certificados
+                    Disponibles</span>
+                </div>
+                <div _ngcontent-sto-c68="" class="card-body py-3 border-0 ng-tns-c68-0"
+                  style="display: flex; flex-direction: row">
+                  <div _ngcontent-sto-c68="" class="card-body py-3 border-0 col-xl-4 ng-tns-c68-0">
+                    <p _ngcontent-sto-c68="" class="ng-tns-c68-0">
+                      <strong _ngcontent-sto-c68="" class="ng-tns-c68-0">{{data.name}}</strong>
+                    </p>
+                    <p _ngcontent-sto-c68="" class="ng-tns-c68-0">
+                      Disponible: {{data.available}}
+                    </p>
+                    <p _ngcontent-sto-c68="" class="ng-tns-c68-0">
+                      Contacto: {{data.phoneNumber}}
+                    </p>
+                    <p _ngcontent-sto-c68="" class="ng-tns-c68-0">
+                      Email: {{data.email}}
+                    </p>
+                    <p _ngcontent-sto-c68="" class="ng-tns-c68-0">
+                      <button type="button" (click)="goToDetailSpot(data.id)"
+                        class="ng-tns-c50-2 btn btn-danger btn-block btn-sm">
+                        Ver detalles
+                      </button>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!---->
+          </div>
+          <div _ngcontent-sto-c68="" class="card-footer border-0 ng-tns-c68-0"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-setup-spot-market #setupSpotMarket></app-setup-spot-market>
+<dx-data-grid noDataText="" height="0px"></dx-data-grid>

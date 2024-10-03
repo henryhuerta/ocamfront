@@ -1,0 +1,5 @@
+<app-basic-table-list  [title]="title" [columns]="columns" [dataSource]="data" (onRefresh)="getGridData()"
+(onNew)="create()" (onEdit)="update($event)" (onDisable)="disable($event)" (onEnable)="enable($event)">
+</app-basic-table-list>
+
+<app-create-or-update-frequent-question #createOrUpdateModal></app-create-or-update-frequent-question>

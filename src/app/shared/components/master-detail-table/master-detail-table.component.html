@@ -1,0 +1,43 @@
+<div class="table-responsive text-nowrap">
+  <dx-data-grid id="dataGrid" [dataSource]="dataSource" [columns]="columnsSource" [(summary)]="summary"
+    [remoteOperations]="false" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true"
+    (onRowUpdated)="onChangedDataSource($event)" (onSelectionChanged)="onChangedDataSource($event)">
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="[10, 25, 50, 100, 300]">
+    </dxo-pager>
+
+    <dxo-editing mode="cell" [allowUpdating]="allowEditingDataSource" [allowAdding]="false"></dxo-editing>
+
+    <div *dxTemplate="let data of 'checkFieldTemplate'">
+      <dx-check-box [id]="data.data['dataField']" [(value)]="data.data['dataField']"></dx-check-box>
+    </div>
+    <div *dxTemplate="let data of 'textFieldTemplate'">
+      <dx-text-box [(value)]="data.data['dataField']"> </dx-text-box>
+    </div>
+    <div *dxTemplate="let data of 'numberFieldTemplate'">
+      <dx-number-box [(value)]="data.data['dataField']" type="number">
+      </dx-number-box>
+    </div>
+    <div *dxTemplate="let data of 'dateFieldTemplate'">
+      <dx-date-box [(value)]="data.data['dataField']" displayFormat="{{ DisplayFormatDate }}" type="date">
+      </dx-date-box>
+    </div>
+    <div *dxTemplate="let data of 'dateTemplate'">
+      {{ data.value | date: DisplayFormatDate }}
+    </div>
+    <div *dxTemplate="let data of 'dateTimeTemplate'">
+      {{ data.value | date: DisplayFormatDateTime }}
+    </div>
+    <div *dxTemplate="let data of 'amountTemplate'">
+      {{ data.value | currency: Currency }}
+    </div>
+    <dxo-master-detail [enabled]="true" template="masterDetail">
+    </dxo-master-detail>
+    <div *dxTemplate="let data of 'masterDetail'">
+      <app-master-detail-template [columns]="columnsDetailSource" [dataSource]="data.data[keySource]"
+        [allowEditingDataSource]="allowEditingDetailDataSource" [allowSelectDataSource]="allowSelectDetailDataSource"
+        (changedData)="onChangedDetailDataSource($event)"
+        (changedSelectedData)="onChangedSelectionDetailDataSource($event)"></app-master-detail-template>
+    </div>
+  </dx-data-grid>
+</div>
