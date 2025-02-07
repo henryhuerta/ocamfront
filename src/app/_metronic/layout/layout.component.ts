@@ -117,15 +117,14 @@ export class LayoutComponent implements OnInit, OnDestroy {
       'app.header.display',
       config
     ) as boolean;
-    this.appFooterDisplay = false;// this.layout.getProp(
-      // 'app.footer.display',
-      // config
-    // ) as boolean;
-    this.appSidebarDisplay = false;
-    // this.layout.getProp(
-    //   'app.sidebar.display',
-    //   config
-    // ) as boolean;
+    this.appFooterDisplay =  this.layout.getProp(
+      'app.footer.display',
+      config
+    ) as boolean;//false
+    this.appSidebarDisplay = this.layout.getProp(
+      'app.sidebar.display',
+      config
+    ) as boolean; //false;
     this.appSidebarPanelDisplay = this.layout.getProp(
       'app.sidebar-panel.display',
       config

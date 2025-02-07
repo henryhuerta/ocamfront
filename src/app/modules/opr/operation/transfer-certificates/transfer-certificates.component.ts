@@ -362,6 +362,7 @@ export class TransferCertificatesComponent
 
   verifyData() {
     if (!(this.Account.id > 0)) {
+      console.log(this.Account)
       this.proccessErrors = {
         accountToTransfer: ['DEBE ASIGNAR UNA CUENTA A TRANSFERIR'],
       };
