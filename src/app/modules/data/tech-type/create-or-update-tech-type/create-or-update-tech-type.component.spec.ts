@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CreateOrUpdateTechTypeComponent } from './create-or-update-techtype.component';
+import { CreateOrUpdateTechTypeComponent } from './create-or-update-tech-type.component';
 
 
 describe('CreateOrUpdateTechTypeComponent', () => {
