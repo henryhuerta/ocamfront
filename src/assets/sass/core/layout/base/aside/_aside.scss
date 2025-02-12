@@ -117,8 +117,6 @@
 
             background-color: var(--kt-app-aside-minimize-bg-color);
             box-shadow: var(--kt-app-aside-minimize-box-shadow);
-            border-start: var(--kt-app-aside-minimize-border-start);
-            border-end: var(--kt-app-aside-minimize-border-end);
 
             @include property( margin-left, $app-aside-minimize-gap-start);
             @include property( margin-right, $app-aside-minimize-gap-end);
