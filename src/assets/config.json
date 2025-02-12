@@ -1,6 +1,6 @@
 {
-  "data": "https://localhost:44353/api/v2/",
-  "auth": "https://localhost:44390/api/v2/",
-  "report": "https://localhost:44372/",
-  "document": "https://ocam-docs.sostruckingsoftware.com/api/"
+  "data": "http://operadorc4m-001-site1.qtempurl.com/data/api/v2/Account/GetByAccountNumber",
+  "auth": "http://operadorc4m-001-site1.qtempurl.com/auth/api/v2/",
+  "report": "http://operadorc4m-001-site1.qtempurl.com/",
+  "document": "http://operadorc4m-001-site1.qtempurl.com/api/"
 }

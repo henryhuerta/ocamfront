@@ -3,7 +3,7 @@
 //
 
 // General mode
-.app-aside {    
+.app-aside {
     transition: $app-aside-base-transition;
 }
 
@@ -13,16 +13,16 @@
 .app-aside-collapse-d-flex,
 .app-aside-minimize-mobile-d-flex,
 .app-aside-collapse-mobile-d-flex {
-    display: none;    
+    display: none;
 }
 
 // Desktop mode
 @include media-breakpoint-up(lg) {
     // Base
-    .app-aside {        
-        display: flex;    
+    .app-aside {
+        display: flex;
         flex-shrink: 0;
-        width: var(--kt-app-aside-width);      
+        width: var(--kt-app-aside-width);
         background-color: var(--kt-app-aside-base-bg-color);
         box-shadow: var(--kt-app-aside-base-box-shadow);
         border-left: var(--kt-app-aside-base-border-left);
@@ -33,7 +33,7 @@
         @include property( margin-top, $app-aside-base-gap-top);
         @include property( margin-bottom, $app-aside-base-gap-bottom);
         @include property( z-index, $app-aside-base-z-index);
-    }    
+    }
 
     // Vars
     :root {
@@ -66,10 +66,10 @@
         --kt-app-aside-gap-end: #{$app-aside-sticky-gap-end};
         --kt-app-aside-gap-top: #{$app-aside-sticky-gap-top};
         --kt-app-aside-gap-bottom: #{$app-aside-sticky-gap-bottom};
-    }    
+    }
 
     [data-kt-app-aside-collapse="on"] {
-        --kt-app-aside-width: 0px;  
+        --kt-app-aside-width: 0px;
     }
 
     // States
@@ -88,10 +88,10 @@
             @include property( top, $app-aside-fixed-top);
             @include property( bottom, $app-aside-fixed-bottom);
             @include property( right, $app-aside-fixed-right);
-        }  
+        }
 
         [data-kt-app-aside-stacked="true"] & {
-            align-items: stretch; 
+            align-items: stretch;
         }
 
         [data-kt-app-aside-sticky="on"] & {
@@ -128,7 +128,7 @@
 
         [data-kt-app-aside-hoverable="true"] & {
             .app-aside-wrapper {
-                width: var(--kt-app-aside-width-actual); 
+                width: var(--kt-app-aside-width-actual);
             }
         }
 
@@ -148,31 +148,31 @@
     // Utilities
     [data-kt-app-aside-minimize="on"] {
         .app-aside-minimize-d-none {
-            display: none !important;    
+            display: none !important;
         }
 
         .app-aside-minimize-d-flex {
-            display: flex !important;    
+            display: flex !important;
         }
     }
 
     [data-kt-app-aside-sticky="on"] {
         .app-aside-sticky-d-none {
-            display: none !important;    
+            display: none !important;
         }
 
         .app-aside-sticky-d-flex {
-            display: flex !important;    
+            display: flex !important;
         }
-    } 
+    }
 
     [data-kt-app-aside-collapse="on"] {
         .app-aside-collapse-d-none {
-            display: none !important;    
+            display: none !important;
         }
 
         .app-aside-collapse-d-flex {
-            display: flex !important;    
+            display: flex !important;
         }
     }
 
@@ -201,7 +201,7 @@
         background-color: var(--kt-app-aside-base-bg-color-mobile);
         box-shadow: var(--kt-app-aside-base-box-shadow-mobile);
         border-left: var(--kt-app-aside-base-border-start-mobile);
-        order-right: var(--kt-app-aside-base-border-end-mobile);
+        border-right: var(--kt-app-aside-base-border-end-mobile);
 
         @include property( margin-left, $app-aside-base-gap-start-mobile);
         @include property( margin-right, $app-aside-base-gap-end-mobile);
@@ -236,16 +236,16 @@
     // States
     .app-aside {
         [data-kt-app-aside-stacked="true"] & {
-            align-items: stretch; 
+            align-items: stretch;
         }
-            
+
         [data-kt-app-aside-minimize-mobile="on"] & {
             transition: $app-aside-base-transition;
             background-color: var(--kt-app-aside-minimize-bg-color-mobile);
             box-shadow: var(--kt-app-aside-minimize-box-shadow-mobile);
             border-left: var(--kt-app-aside-minimize-border-start-mobile);
             border-right: var(--kt-app-aside-minimize-border-end-mobile);
-        
+
             @include property( margin-left, $app-aside-minimize-gap-start-mobile);
             @include property( margin-right, $app-aside-minimize-gap-end-mobile);
             @include property( margin-top, $app-aside-minimize-gap-top-mobile);
@@ -254,7 +254,7 @@
 
         [data-kt-app-aside-hoverable-mobile="true"] & {
             .app-aside-wrapper {
-                width: var(--kt-app-aside-width-actual); 
+                width: var(--kt-app-aside-width-actual);
             }
         }
 
@@ -274,21 +274,21 @@
     // Utilities
     [data-kt-app-aside-minimize-mobile="on"] {
         .app-aside-minimize-mobile-d-none {
-            display: none !important;    
+            display: none !important;
         }
 
         .app-aside-minimize-mobile-d-flex {
-            display: flex !important;    
+            display: flex !important;
         }
     }
 
     [data-kt-app-aside-collapse-mobile="on"] {
         .app-aside-collapse-mobile-d-none {
-            display: none !important;    
+            display: none !important;
         }
 
         .app-aside-collapse-mobile-d-flex {
-            display: flex !important;    
+            display: flex !important;
         }
     }
 }
