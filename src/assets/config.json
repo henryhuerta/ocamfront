@@ -1,6 +1,6 @@
 {
-  "data": "http://operadorc4m-001-site1.qtempurl.com/data/api/v2/Account/GetByAccountNumber",
-  "auth": "http://operadorc4m-001-site1.qtempurl.com/auth/api/v2/",
+  "data": "http://operadorc4m-001-site1.qtempurl.com/data/data/api/v2/Account/GetByAccountNumber",
+  "auth": "http://operadorc4m-001-site1.qtempurl.com/auth/auth/api/v2/",
   "report": "http://operadorc4m-001-site1.qtempurl.com/",
   "document": "http://operadorc4m-001-site1.qtempurl.com/api/"
 }
